@@ -3,6 +3,8 @@
 @using ProportionalVotingApp.Models.Services
 
 @inject IVotingRepository repository
+@inject NavigationManager navigator
+
 <PageTitle>Create Vote</PageTitle>
 
 <h3>VoteDTO</h3>
@@ -18,17 +20,16 @@
 
     <div class=input-group>
         <label for="options">Options: </label>
+        <select>
         @for(var x = 0; x < vote.Options.Count; x++)
             {
                 <option value="@x">@vote.Options[x]</option>
             }
-        </div>
+        </select>
+       </div>
 
-    <div class="input-group">
-            <label for="addoption">Add Option: </label>
-            <input type="text" id="addoption" @bind-value="optionToAdd" />
-            <button type="button" class="btn-primary" @onclick="@AddOption">AddOption</button>
-    </div>
+       <AddVoteOption OnOptionAdded="@OptionAdded" />
+
     <button type="submit" class="btn-primary">Create</button>
 </div>
 </EditForm>
@@ -43,6 +44,15 @@
         try
         {
             var id = await repository.AddVoteAsync(vote);
+
+            if(id > 0)
+            {
+                navigator.NavigateTo("votes");
+            }
+            else
+            {
+                throw new Exception("Could not create vote but unknown");
+            }
         }
         catch(Exception ex)
         {
@@ -50,8 +60,9 @@
         }
     }
 
-    private void AddOption()
+    private void OptionAdded(string option)
     {
-        vote.AddOption(optionToAdd);
+        vote.AddOption(option);
     }
+
 }

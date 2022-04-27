@@ -5,6 +5,7 @@
 @using ProportionalVotingApp.Models.DTOs
 @using ProportionalVotingApp.Models.Services
 @inject IVotingRepository repository
+@inject NavigationManager navigator
 
 <h1>Votes</h1>
 
@@ -27,10 +28,10 @@ else
             {
                 <tr>
                     <td>@vote.CreatedAt</td>
-                    <td>@vote.Creator</td>
+                    <td><a @onclick="@(() => navigator.NavigateTo($"/votes/{vote.Id}"))">@vote.Creator</a></td>
                     <td>@vote.Completed</td>
                 </tr>
-            }
+            }s
         </tbody>
     </table>
 
@@ -43,5 +44,10 @@ else
     protected override async Task OnInitializedAsync()
     {
         votes = await repository.GetVotesAsync(vote => vote != null);
+    }
+
+    protected async void ShowVote(long id)
+    {
+        navigator.NavigateTo("/votes/" + id);
     }
 }

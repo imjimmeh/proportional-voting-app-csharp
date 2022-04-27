@@ -1,0 +1,42 @@
+﻿@page "/votes/{id:long}"
+@using ProportionalVotingApp.Models
+@using ProportionalVotingApp.Models.DTOs
+@using ProportionalVotingApp.Models.Services
+@using System.ComponentModel.DataAnnotations
+@inject IVotingRepository repository
+
+<h3>ViewVote</h3>
+
+@if(vote == null)
+{
+    <p>Loading vote...</p>
+}
+else
+{
+    <div>
+        <p>Vote by @vote.Creator, created at @vote.CreatedAt</p>
+        @if(vote.Completed)
+        {
+            <p>Completed</p>
+        }
+
+        @for(var x = 0; x < vote.Options.Count; x++)
+        {
+            <p>@vote.Options[x] - @x</p>
+        }
+
+    </div>
+}
+@code {
+    [Parameter]
+    [Range(1, long.MaxValue)]
+    public long id { get; set; }
+
+    public VoteWithIdDTO vote;
+
+    protected override async Task OnInitializedAsync()
+    {
+        vote = await repository.GetVoteByIdAsync(id) ?? throw new Exception($"Unable to find vote for Id {id}");
+    }
+
+}

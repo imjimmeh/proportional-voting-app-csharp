@@ -52,17 +52,23 @@ namespace ProportionalVotingApp.DatabaseService
         {
             var quotesMatchingPredicate = _votes.Where(predicate);
 
-            var projectedToDto = quotesMatchingPredicate.Select(vote => new VoteWithIdDTO
+            var projectedToDto = quotesMatchingPredicate.Select(ConvertToDTOWithId);
+
+            return projectedToDto.ToListAsync();
+        }
+
+        private static Expression<Func<VoteDbEntity, VoteWithIdDTO>> ConvertToDTOWithId => vote => new VoteWithIdDTO
             {
                 Id = vote.Id,
                 Completed = vote.Completed,
                 CreatedAt = vote.CreatedAt,
                 Options = vote.VoteOptions.Select(option => option.Value).ToList(),
                 Creator = vote.Creator
-            });
+            };
 
-            return projectedToDto.ToListAsync();
+        public Task<VoteWithIdDTO?> GetVoteByIdAsync(long id)
+        {
+            return _votes.Where(vote => vote.Id == id).Select(ConvertToDTOWithId).FirstOrDefaultAsync();
         }
-
     }
 }

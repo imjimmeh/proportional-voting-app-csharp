@@ -1,0 +1,26 @@
+﻿@using ProportionalVotingApp.Models.DTOs
+@using ProportionalVotingApp.Models.Services
+@using System.ComponentModel.DataAnnotations
+
+@inject IVotingRepository repository
+@inject NavigationManager navigator
+
+<div class="input-group">
+    <label for="addoption">Add Option: </label>
+    <input type="text" id="addoption" @bind-value="optionToAdd" />
+    <button type="button" class="btn-primary" @onclick="@AddOption">AddOption</button>
+</div>
+
+@code {
+    [MinLength(1)]
+    string optionToAdd = "";
+
+    [Parameter]
+    public EventCallback<string> OnOptionAdded { get; set; }
+
+    private void AddOption()
+    {
+        OnOptionAdded.InvokeAsync(optionToAdd);
+    }
+
+}

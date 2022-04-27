@@ -7,5 +7,7 @@ namespace ProportionalVotingApp.Models.Services
     {
         Task<long> AddVoteAsync(VoteDTO vote);
         Task<List<VoteWithIdDTO>> GetVotesAsync(Expression<Func<VoteDbEntity, bool>> predicate);
+
+        Task<VoteWithIdDTO?> GetVoteByIdAsync(long id);
     }
 }
