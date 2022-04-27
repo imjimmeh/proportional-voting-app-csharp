@@ -1,0 +1,7 @@
+﻿@page
+@model ProprotionalVotingApp.Pages.CreateVoteModel
+@{
+    Layout = "_Layout";
+}
+
+@{await Html.RenderPartialAsync("VoteDTO", Model.Vote);}

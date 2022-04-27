@@ -1,0 +1,47 @@
+﻿@page "/votes"
+
+<PageTitle>Votes</PageTitle>
+
+@using ProportionalVotingApp.Models.DTOs
+@using ProportionalVotingApp.Models.Services
+@inject IVotingRepository repository
+
+<h1>Votes</h1>
+
+@if (votes == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Creator</th>
+                <th>Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vote in votes)
+            {
+                <tr>
+                    <td>@vote.CreatedAt</td>
+                    <td>@vote.Creator</td>
+                    <td>@vote.Completed</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div><a href="/votes/create">Create Vote</a></div>
+}
+
+@code {
+    private List<VoteWithIdDTO> votes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        votes = await repository.GetVotesAsync(vote => vote != null);
+    }
+}

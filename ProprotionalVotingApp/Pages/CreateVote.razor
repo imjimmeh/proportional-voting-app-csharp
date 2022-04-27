@@ -1,0 +1,57 @@
+﻿@page "/votes/create"
+@using ProportionalVotingApp.Models.DTOs
+@using ProportionalVotingApp.Models.Services
+
+@inject IVotingRepository repository
+<PageTitle>Create Vote</PageTitle>
+
+<h3>VoteDTO</h3>
+
+<EditForm OnValidSubmit="@HandleValidSubmit" Model="@vote">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+<div>
+    <div class=input-group>
+        <label for="creator">Creator: </label>
+        <input id="creator" @bind-value="vote.Creator"/>
+    </div>
+
+    <div class=input-group>
+        <label for="options">Options: </label>
+        @for(var x = 0; x < vote.Options.Count; x++)
+            {
+                <option value="@x">@vote.Options[x]</option>
+            }
+        </div>
+
+    <div class="input-group">
+            <label for="addoption">Add Option: </label>
+            <input type="text" id="addoption" @bind-value="optionToAdd" />
+            <button type="button" class="btn-primary" @onclick="@AddOption">AddOption</button>
+    </div>
+    <button type="submit" class="btn-primary">Create</button>
+</div>
+</EditForm>
+@code {
+    VoteDTO vote = new VoteDTO();
+
+    string optionToAdd = "";
+
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var id = await repository.AddVoteAsync(vote);
+        }
+        catch(Exception ex)
+        {
+            throw;
+        }
+    }
+
+    private void AddOption()
+    {
+        vote.AddOption(optionToAdd);
+    }
+}
