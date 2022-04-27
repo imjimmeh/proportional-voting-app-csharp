@@ -1,0 +1,15 @@
+﻿@using ProportionalVotingApp.Models.Base
+@using ProportionalVotingApp.Models.DTOs
+
+<div class=form-group>
+    <label for="creator">Creator: </label>
+    <input id="creator" @bind-value="vote.Creator" class="form-control" disabled="@Disabled" placeholder="Your name"/>
+</div>
+
+@code {
+    [Parameter]
+    public IVote vote { get; set; } = null!;
+
+    [Parameter]
+    public bool Disabled { get; set; }
+}

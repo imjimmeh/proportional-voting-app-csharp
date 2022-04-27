@@ -12,31 +12,22 @@
 <EditForm OnValidSubmit="@HandleValidSubmit" Model="@vote">
     <DataAnnotationsValidator />
     <ValidationSummary />
-<div>
-    <div class=input-group>
-        <label for="creator">Creator: </label>
-        <input id="creator" @bind-value="vote.Creator"/>
+    <div>
+        <_VoteName vote="@vote" Disabled="false"></_VoteName>
+        <_VoteCreator vote="@vote" Disabled="false"></_VoteCreator>
+
+        <VoteOptions CanAddOptions=true Options="vote.Options" Context="voteOption">
+            <VoteOptionTemplate>
+                <option value="@voteOption.Id">@voteOption.Value</option>
+            </VoteOptionTemplate>
+        </VoteOptions>
+
+        <button type="submit" class="btn-primary">Create</button>
     </div>
-
-    <div class=input-group>
-        <label for="options">Options: </label>
-        <select>
-        @for(var x = 0; x < vote.Options.Count; x++)
-            {
-                <option value="@x">@vote.Options[x]</option>
-            }
-        </select>
-       </div>
-
-       <AddVoteOption OnOptionAdded="@OptionAdded" />
-
-    <button type="submit" class="btn-primary">Create</button>
-</div>
 </EditForm>
 @code {
     VoteDTO vote = new VoteDTO();
 
-    string optionToAdd = "";
 
 
     private async Task HandleValidSubmit()
@@ -45,7 +36,7 @@
         {
             var id = await repository.AddVoteAsync(vote);
 
-            if(id > 0)
+            if (id > 0)
             {
                 navigator.NavigateTo("votes");
             }
@@ -54,15 +45,9 @@
                 throw new Exception("Could not create vote but unknown");
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw;
         }
     }
-
-    private void OptionAdded(string option)
-    {
-        vote.AddOption(option);
-    }
-
 }

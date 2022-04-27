@@ -2,13 +2,10 @@
 @using ProportionalVotingApp.Models.Services
 @using System.ComponentModel.DataAnnotations
 
-@inject IVotingRepository repository
-@inject NavigationManager navigator
-
 <div class="input-group">
     <label for="addoption">Add Option: </label>
-    <input type="text" id="addoption" @bind-value="optionToAdd" />
-    <button type="button" class="btn-primary" @onclick="@AddOption">AddOption</button>
+    <input class="form-control" type="text" id="addoption" @bind-value="optionToAdd" />
+    <button type="button" class="btn-primary form-control" @onclick="@AddOption">AddOption</button>
 </div>
 
 @code {

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProportionalVotingApp.Models
 {
     [Table("Votes")]
-    public class VoteDbEntity : IVote
+    public class VoteDbEntity : IVote<VoteOptionDbEntity>
     {
         public VoteDbEntity()
         {
@@ -15,33 +15,39 @@ namespace ProportionalVotingApp.Models
         public VoteDbEntity(string creator, IEnumerable<string> voteOptions)
         {
             Creator = creator ?? throw new ArgumentNullException(nameof(creator));
-            VoteOptions = voteOptions.Select(option => new VoteOptionDbEntity(option, this)).ToList();
+            Options = voteOptions.Select(option => new VoteOptionDbEntity(option, this)).ToList();
         }
 
 
         public VoteDbEntity(string creator, IList<VoteOptionDbEntity> voteOptions)
         {
             Creator = creator ?? throw new ArgumentNullException(nameof(creator));
-            VoteOptions = voteOptions ?? throw new ArgumentNullException(nameof(voteOptions));
+            Options = voteOptions ?? throw new ArgumentNullException(nameof(voteOptions));
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; init; }
 
-        public IList<VoteOptionDbEntity> VoteOptions { get; init; } = new List<VoteOptionDbEntity>();
+        public IList<VoteOptionDbEntity> Options { get; init; } = new List<VoteOptionDbEntity>();
 
         public DateTime CreatedAt { get; init; }
 
-        public string Creator { get; init; }
+        [Required]
+        [StringLength(50)]
+        [MinLength(3)]
+        public string Creator { get; set; }
 
         public bool Completed { get; private set; }
 
-        public IList<string> Options => VoteOptions?.Select(option => option.Value).ToList() ?? new List<string>();
+        [Required]
+        [StringLength(50)]
+        [MinLength(5)]
+        public string Name { get; set; }
 
         public void AddOption(string option)
         {
-            VoteOptions.Add(new VoteOptionDbEntity(option, this));
+            Options.Add(new VoteOptionDbEntity(option, this));
         }
 
         public void SetComplete(bool complete) => Completed = complete;

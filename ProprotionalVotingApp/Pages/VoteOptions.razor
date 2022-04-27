@@ -1,0 +1,38 @@
+﻿@using ProportionalVotingApp.Models.DTOs
+
+<div class="form-group">
+    <label for="voteoptions">Options:</label>
+    <select class="form-control">
+    @foreach(var option in Options)
+    {
+        @VoteOptionTemplate(option)   
+    }
+    </select>
+</div>
+
+@if(CanAddOptions)
+{
+    <AddVoteOption OnOptionAdded="@OptionAdded" />
+}
+
+@code {
+    [Parameter]
+    public RenderFragment<VoteOptionDTO> VoteOptionTemplate { get; set; } = null!;
+
+    [Parameter]
+    public IList<VoteOptionDTO> Options { get; set; } = null!;
+
+    [Parameter]
+    public bool CanAddOptions { get; init; }
+
+    string optionToAdd = "";
+
+    private void OptionAdded(string option)
+    {
+        Options.Add(new VoteOptionDTO
+        {
+            Value = option,
+            Id = 0
+        });
+    }
+}

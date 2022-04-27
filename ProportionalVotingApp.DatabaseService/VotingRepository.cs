@@ -34,10 +34,11 @@ namespace ProportionalVotingApp.DatabaseService
             {
                 Creator = vote.Creator,
                 CreatedAt = vote.CreatedAt,
-                VoteOptions = vote.Options.Select(option => new VoteOptionDbEntity
+                Options = vote.Options.Select(option => new VoteOptionDbEntity
                 {
-                    Value = option
-                }).ToList()
+                    Value = option.Value
+                }).ToList(),
+                Name = vote.Name
             };
             await _votes.AddAsync(entity);
             var result = await SaveChangesAsync();
@@ -62,8 +63,13 @@ namespace ProportionalVotingApp.DatabaseService
                 Id = vote.Id,
                 Completed = vote.Completed,
                 CreatedAt = vote.CreatedAt,
-                Options = vote.VoteOptions.Select(option => option.Value).ToList(),
-                Creator = vote.Creator
+                Options = vote.Options.Select(option => new VoteOptionDTO
+                {
+                    Id = option.Id,
+                    Value = option.Value
+                }).ToList(),
+                Creator = vote.Creator,
+                Name = vote.Name
             };
 
         public Task<VoteWithIdDTO?> GetVoteByIdAsync(long id)

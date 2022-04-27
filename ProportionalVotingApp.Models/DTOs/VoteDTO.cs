@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProportionalVotingApp.Models.DTOs
 {
-    public class VoteDTO : IVote
+    public class VoteDTO : IVote<VoteOptionDTO>
     {
-        public IList<string> Options { get; set; }
+        public IList<VoteOptionDTO> Options { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -16,15 +16,20 @@ namespace ProportionalVotingApp.Models.DTOs
 
         public bool Completed { get; set; }
 
+        [Required]
+        [StringLength(50)]
+        [MinLength(5)]
+        public string Name { get; set; }
+
         public VoteDTO()
         {
-            Options = new List<string>();
+            Options = new List<VoteOptionDTO>();
             Creator = "";
             CreatedAt = DateTime.UtcNow;
             Completed = false;
         }
 
-        public VoteDTO(IList<string> options, string creator)
+        public VoteDTO(IList<VoteOptionDTO> options, string creator)
         {
             Options = options ?? throw new ArgumentNullException(nameof(options));
             Creator = creator;
@@ -32,7 +37,7 @@ namespace ProportionalVotingApp.Models.DTOs
             Completed = false;
         }
 
-        public void AddOption(string option)
+        public void AddOption(VoteOptionDTO option)
         {
             Options.Add(option);
         }
