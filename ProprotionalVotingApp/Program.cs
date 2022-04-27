@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddDbContext<IVotingRepository, VotingRepository>(options => options.UseSqlServer("Data Source=192.168.1.161;Initial Catalog=VotingApp;Persist Security Info=True;User ID=SA;Password=");
+builder.Services.AddDbContext<IVotingRepository, VotingRepository>(options => options.UseSqlServer("Data Source=192.168.1.161;Initial Catalog=VotingApp;Persist Security Info=True;User ID=SA;Password="));
 
 var app = builder.Build();
 
