@@ -9,15 +9,15 @@
 </div>
 
 @code {
-    [MinLength(1)]
+    [MinLength(5)]
     string optionToAdd = "";
 
     [Parameter]
     public EventCallback<string> OnOptionAdded { get; set; }
 
-    private void AddOption()
+    private async void AddOption()
     {
-        OnOptionAdded.InvokeAsync(optionToAdd);
+        await OnOptionAdded.InvokeAsync(optionToAdd);
     }
 
 }

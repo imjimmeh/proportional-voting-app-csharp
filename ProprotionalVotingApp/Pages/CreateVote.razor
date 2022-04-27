@@ -16,11 +16,15 @@
         <_VoteName vote="@vote" Disabled="false"></_VoteName>
         <_VoteCreator vote="@vote" Disabled="false"></_VoteCreator>
 
+        <div class="form-group">
         <VoteOptions CanAddOptions=true Options="vote.Options" Context="voteOption">
             <VoteOptionTemplate>
-                <option value="@voteOption.Id">@voteOption.Value</option>
+                <div>
+                 <button value="@voteOption.Id" type="button" class="form-control">@voteOption.Value</button>
+                </div>
             </VoteOptionTemplate>
         </VoteOptions>
+        </div>
 
         <button type="submit" class="btn-primary">Create</button>
     </div>
@@ -28,7 +32,10 @@
 @code {
     VoteDTO vote = new VoteDTO();
 
-
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
 
     private async Task HandleValidSubmit()
     {
