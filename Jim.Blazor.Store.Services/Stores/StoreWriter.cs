@@ -11,14 +11,15 @@ namespace Jim.Blazor.Store.Services.Stores
         {
         }
 
-        public virtual async Task<bool> WriteAsync<T>(string key, T value) where T : class
+        public virtual async Task<bool> WriteAsync<T>(string key, T? value)
+            where T : class?
         {
             try
             {
                 if (key == null)
                     throw new ArgumentNullException(nameof(key));
 
-                string serialised = await ConvertValue(value);
+                string? serialised = await ConvertValue(value);
 
                 await _js.InvokeVoidAsync(methodPath, key, serialised);
 
@@ -30,9 +31,10 @@ namespace Jim.Blazor.Store.Services.Stores
             }
         }
 
-        private async Task<string> ConvertValue<T>(T value) where T : class
+        private async Task<string?> ConvertValue<T>(T? value)
+            where T : class?
         {
-            string serialised = value == null ? "" : value.Serialise();
+            string? serialised = value == null ? "" : value.Serialise();
 
             return serialised;
         }

@@ -1,6 +1,5 @@
 using Jim.Blazor.Store.Models.Options;
 using Jim.Blazor.Store.Models.Services;
-using Jim.Blazor.Store.Models.Tests;
 using Jim.Blazor.Store.Services;
 using Jim.Blazor.Store.Services.Stores;
 
@@ -11,9 +10,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddScoped<IBlazorStoreReader, StoreReader>();
+builder.Services.AddScoped<IBlazorStoreWriter, StoreWriter>();
 
-builder.Services.AddScoped<IBlazorStoreWriterWatcher<TestStoreModel>, StoreWriterWatcher<TestStoreModel>>();
 builder.Services.AddSingleton(new BlazorStoreOptions(StoreType.Local));
+builder.Services.AddScoped<IStoreWriterWatcherFactory, StoreWriterWatcherFactory>();
 
 var app = builder.Build();
 

@@ -2,9 +2,10 @@
 @using Jim.Blazor.Store.Models.Events
 @using Jim.Blazor.Store.Models.Services
 @using Jim.Blazor.Store.Models.Tests
+@using Jim.Blazor.Store.Services
 @using Jim.Core.Store.Models.Services
 
-@inject IBlazorStoreWriterWatcher<TestStoreModel> storeWriter
+@inject IStoreWriterWatcherFactory watcherFactory
 @inject IBlazorStoreReader storeReader
 @inject IJSRuntime JS
 
@@ -27,13 +28,17 @@
 </div>
 
 @code {
+    IBlazorStoreWriterWatcher<TestStoreModel?>? watcher;
+    
     string key = "";
 
     string value = "";
 
     protected override Task OnInitializedAsync()
     {
-        storeWriter.OnStoreWrite += OnStoreWrite;
+        watcher = watcherFactory.GetWatcher<TestStoreModel?>();
+        watcher.OnStoreWrite += OnStoreWrite;
+
         return base.OnInitializedAsync();
     }
 
@@ -46,7 +51,7 @@
 
     async Task SetStore()
     {
-        var result = await storeWriter.WriteAsync(key, GenerateStore());
+        var result = await watcher.WriteAsync(key, GenerateStore());
     }
 
     async void OnStoreWrite(object? sender, BlazorStoreEntryChangedEventArgs args)

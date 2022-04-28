@@ -4,8 +4,13 @@ using Jim.Core.Store.Models.Watchers;
 
 namespace Jim.Blazor.Store.Models.Services
 {
-    public interface IBlazorStoreWriterWatcher<TValue> : IStoreWriterWatcher<BlazorStoreOptions, BlazorStoreEntryChangedEventArgs<TValue?>, TValue>
+    public interface IBlazorStoreWriterWatcher<TValue> : IBlazorStoreWriterWatcher, IStoreWriterWatcher<BlazorStoreOptions, BlazorStoreEntryChangedEventArgs<TValue?>, TValue>
         where TValue : class?
     {
+    }
+
+    public interface IBlazorStoreWriterWatcher : IStoreWriterWatcher
+    {
+
     }
 }

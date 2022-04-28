@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jim.Blazor.Store.Models.Tests
 {
-    public class TestStoreModel
+    public record TestStoreModel
     {
         public TestStoreModel()
         {

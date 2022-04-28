@@ -48,11 +48,11 @@ namespace Jim.Core.Extensions
             }
         }
 
-        public static string Serialise<T>(this T toSerialise)
-            where T : class
+        public static string? Serialise<T>(this T? toSerialise)
+            where T : class?
         {
             if (toSerialise == null)
-                throw new ArgumentNullException(nameof(toSerialise));
+                return null;
 
             try
             {
