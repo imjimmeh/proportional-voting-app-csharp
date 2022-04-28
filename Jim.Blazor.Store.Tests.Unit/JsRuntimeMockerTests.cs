@@ -11,22 +11,19 @@ namespace Jim.Blazor.Store.Tests.Unit
     public class JsRuntimeMockerTests
     {
         private readonly BlazorStoreOptions _options = new BlazorStoreOptions(StoreType.Local);
-
+        private readonly IStoreMocker _store = new StoreMocker();
         private IJSRuntime? _runtime;
 
         [SetUp]
         public void Setup()
         {
-            var storeMocker = new StoreMocker();
-            _runtime = new IJSRuntimeMocker(storeMocker);
         }
+
+        public IJSRuntime JS => _runtime ?? new IJSRuntimeMocker(_store);
 
         [Test, Order(1)]
         public async Task Should_SetItemAsync()
         {
-            if (_runtime == null)
-                Assert.Fail("JsRuntimeMocker is null");
-
             await GenerateAndSetRandomValuesAsync();
 
             Assert.Pass();
@@ -37,21 +34,20 @@ namespace Jim.Blazor.Store.Tests.Unit
         {
             (string key, string value) = await GenerateAndSetRandomValuesAsync();
 
-            var get = await _runtime.InvokeAsync<string>(_options.GetMethodPath(JsStoreMethod.Get), key);
+            var get = await JS.InvokeAsync<string>(_options.GetMethodPath(JsStoreMethod.Get), key);
+
             Assert.AreEqual(value, get);
         }
 
         [Test]
         public async Task Should_Not_Get_Key_With_Space()
         {
-            Assert.NotNull(_runtime);
-
             try
             {
                 (string key, string value) = await GenerateAndSetRandomValuesAsync();
                 key = key + " ";
 
-                var get = await _runtime.InvokeAsync<string>(_options.GetMethodPath(JsStoreMethod.Get), key);
+                var get = await JS.InvokeAsync<string>(_options.GetMethodPath(JsStoreMethod.Get), key);
 
                 Assert.True(string.IsNullOrEmpty(get));
             }
@@ -64,12 +60,10 @@ namespace Jim.Blazor.Store.Tests.Unit
         [Test]
         public async Task Should_Not_Get_RandomKey()
         {
-            Assert.NotNull(_runtime);
-
             try
             {
                 var randomKey = GenerateString();
-                var get = await _runtime.InvokeAsync<string>(_options.GetMethodPath(JsStoreMethod.Get), randomKey);
+                var get = await JS.InvokeAsync<string>(_options.GetMethodPath(JsStoreMethod.Get), randomKey);
 
                 Assert.True(string.IsNullOrEmpty(get));
             }
@@ -81,12 +75,9 @@ namespace Jim.Blazor.Store.Tests.Unit
 
         private async Task<(string key, string value)> GenerateAndSetRandomValuesAsync()
         {
-            if(_runtime == null)
-                throw new ArgumentNullException(nameof(_runtime));
-
             var testValues = GetKeyValueToTest();
 
-            await _runtime.InvokeVoidAsync(_options.GetMethodPath(JsStoreMethod.Set), testValues.key, testValues.value);
+            await JS.InvokeVoidAsync(_options.GetMethodPath(JsStoreMethod.Set), testValues.key, testValues.value);
 
             return testValues;
         }

@@ -23,8 +23,6 @@
     [Parameter]
     public bool CanAddOptions { get; init; }
 
-    string optionToAdd = "";
-
     private void OptionAdded(string option)
     {
         Options.Add(new VoteOptionDTO

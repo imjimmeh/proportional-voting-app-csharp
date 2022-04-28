@@ -22,12 +22,12 @@ namespace Jim.Blazor.Store.Tests.Unit.Mocks
             return Task.FromResult(true);
         }
 
-        public Task<string> GetItem(string key)
+        public async Task<string?> GetItem(string key)
         {
-            if (_stores.TryGetValue(key, out string value))
-                return Task.FromResult(value);
-
-            throw new KeyNotFoundException(key);
+            if (_stores.TryGetValue(key, out string? value))
+                return value;
+            else
+                return null;
         }
     }
 }

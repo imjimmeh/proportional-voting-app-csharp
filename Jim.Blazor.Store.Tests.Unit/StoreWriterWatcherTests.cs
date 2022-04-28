@@ -39,7 +39,7 @@ namespace Jim.Blazor.Store.Tests.Unit
 
             SetWriter(Watcher);
 
-            Watcher.OnStoreWrite += OnStoreChange;
+            Watcher.OnStoreWrite += OnStoreChange!;
 
             if (_returnedValues != null)
                 _returnedValues.Clear();
@@ -50,7 +50,7 @@ namespace Jim.Blazor.Store.Tests.Unit
         [TearDown]
         public void TearDown()
         {
-            Watcher.OnStoreWrite -= OnStoreChange;
+            Watcher.OnStoreWrite -= OnStoreChange!;
             _returnedValues?.Clear();
         }
 
@@ -62,7 +62,11 @@ namespace Jim.Blazor.Store.Tests.Unit
             Thread.Sleep(TIME_TO_WAIT_PER_WRITE_IN_MS);
 
             var firstInBag = _returnedValues?.FirstOrDefault();
-            ValidateResult(key, value, firstInBag);
+
+            if (firstInBag == null)
+                Assert.Fail("No items found in collection");
+
+            ValidateResult(key, value, firstInBag!);
         }
 
 
@@ -72,18 +76,19 @@ namespace Jim.Blazor.Store.Tests.Unit
             var keyValuePairs = GenerateKeysAndValues();
             var tasks = keyValuePairs.AsParallel().Select(async key => await SetKeyValue(key.Key, key.Value)).ToArray();
 
-            var complete = Task.WaitAll(tasks, TimeSpan.FromSeconds(10));
+            var complete = await Task.WhenAll(tasks);
 
-            Thread.Sleep(1000);
-
-            Assert.True(_returnedValues.Count == keyValuePairs.Count, $"Expected {keyValuePairs.Count} returned values but received {_returnedValues.Count}");
+            Assert.True(_returnedValues?.Count == keyValuePairs.Count, $"Expected {keyValuePairs.Count} returned values but received {_returnedValues?.Count}");
 
             foreach ((string key, TestStoreModel value) in keyValuePairs)
             {
-                var matchingValue = _returnedValues.Where(value => value.Key == key).FirstOrDefault();
+                var matchingValue = _returnedValues?.Where(value => value.Key == key).FirstOrDefault();
+
+                if (matchingValue == null)
+                    Assert.Fail($"Could not find matching value in collection for {key}");
 
                 Assert.NotNull(matchingValue);
-                ValidateResult(key, value, matchingValue);
+                ValidateResult(key, value, matchingValue!);
             }
         }
 
@@ -109,7 +114,7 @@ namespace Jim.Blazor.Store.Tests.Unit
             return keyValuePairs;
         }
 
-        private void OnStoreChange(object? sender, BlazorStoreEntryChangedEventArgs<TestStoreModel> args)
+        private void OnStoreChange(object? sender, BlazorStoreEntryChangedEventArgs<TestStoreModel?> args)
         {
             bool haveLock = false;
 
