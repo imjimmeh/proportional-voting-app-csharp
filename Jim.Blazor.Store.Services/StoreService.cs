@@ -1,4 +1,4 @@
-﻿using Jim.Blazor.Store.Models;
+﻿using Jim.Blazor.Store.Models.Options;
 using Microsoft.JSInterop;
 
 namespace Jim.Blazor.Store.Services

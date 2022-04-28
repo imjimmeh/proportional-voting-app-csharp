@@ -27,7 +27,7 @@
         {
             foreach (var type in _mappings)
             {
-                if (Equals(type, toConvert))
+                if (string.Equals(type.Value, toConvert))
                     return type.Key;
             }
 

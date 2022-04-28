@@ -1,6 +1,6 @@
 ﻿using Jim.Core.Helpers;
 
-namespace Jim.Blazor.Store.Models
+namespace Jim.Blazor.Store.Models.Options
 {
     public static class StoreTypes
     {
@@ -23,12 +23,12 @@ namespace Jim.Blazor.Store.Models
                 return _dictionary;
             }
         }
-        public static string ToJSStoreName(this StoreType storeType) =>_converter.ToValue(storeType);
+        public static string ToJSStoreName(this StoreType storeType) => _converter.ToValue(storeType);
 
         public static StoreType ToStoreType(this string storeType) => _converter.ToEnum(storeType);
 
         private static Dictionary<StoreType, string> InitialiseDictionary() => new Dictionary<StoreType, string> {
-            { StoreType.Local, LOCAL }, { StoreType.Session, SESSION} 
+            { StoreType.Local, LOCAL }, { StoreType.Session, SESSION}
         };
     }
 }

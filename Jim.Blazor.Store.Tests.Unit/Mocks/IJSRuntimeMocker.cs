@@ -1,4 +1,4 @@
-using Jim.Blazor.Store.Models;
+using Jim.Blazor.Store.Models.Options;
 using Microsoft.JSInterop;
 using NUnit.Framework;
 using System;
@@ -12,9 +12,9 @@ namespace Jim.Blazor.Store.Tests.Unit
     {
         private IStoreMocker _storeMocker;
 
-        public IJSRuntimeMocker()
+        public IJSRuntimeMocker(IStoreMocker? storeMocker = null)
         {
-            _storeMocker = new StoreMocker();
+            _storeMocker = storeMocker ?? new StoreMocker();
         }
 
         public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.PublicProperties)] TValue>(string identifier, object?[]? args)
@@ -25,8 +25,6 @@ namespace Jim.Blazor.Store.Tests.Unit
 
             switch (method)
             {
-                case JsStoreMethod.None:
-                    throw new Exception("Did not receive a valid JsStoreMethod");
                 case JsStoreMethod.Get:
                     return GetFromStore<TValue>(args);
                 case JsStoreMethod.Set:
@@ -34,6 +32,8 @@ namespace Jim.Blazor.Store.Tests.Unit
                         SetStore(args);
                         return new ValueTask<TValue>();
                     }
+                case JsStoreMethod.None:
+                    throw new Exception("Did not receive a valid JsStoreMethod");
                 default:
                     throw new Exception("Method not mapped");
             }
@@ -50,14 +50,14 @@ namespace Jim.Blazor.Store.Tests.Unit
             return method;
         }
 
-        private ValueTask<TValue> GetFromStore<TValue>(object?[]? args)
+        private async ValueTask<TValue> GetFromStore<TValue>(object?[]? args)
         {
             string key = GetKey(args, 1);
 
-            var value = _storeMocker.GetItem(key);
+            var value = await _storeMocker.GetItem(key);
 
             if (value is TValue tvalue)
-                return new ValueTask<TValue>(tvalue);
+                return tvalue;
 
             throw new Exception($"Value is not expected type - expected {typeof(TValue)} but received {value.GetType()}");
         }
@@ -121,7 +121,8 @@ namespace Jim.Blazor.Store.Tests.Unit
             {
                 int end = indexOfSeperator - 1;
                 int start = indexOfSeperator + 1;
-                return new(identifier[..end], identifier[start..]);
+
+                return new(identifier[..indexOfSeperator], identifier[start..]);
             }
             catch (Exception ex)
             {

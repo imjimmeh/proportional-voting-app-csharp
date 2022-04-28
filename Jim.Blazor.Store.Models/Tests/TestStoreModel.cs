@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jim.Blazor.Store.Tests.Unit.Models
+namespace Jim.Blazor.Store.Models.Tests
 {
-    internal class TestStoreModel
+    public class TestStoreModel
     {
+        public TestStoreModel()
+        {
+        }
+
         public TestStoreModel(string testString, int testInt, bool testBool, int? testNullableInt)
         {
             TestString = testString ?? throw new ArgumentNullException(nameof(testString));

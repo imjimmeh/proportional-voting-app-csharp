@@ -1,6 +1,6 @@
 ﻿using Jim.Core.Helpers;
 
-namespace Jim.Blazor.Store.Models
+namespace Jim.Blazor.Store.Models.Options
 {
     public static class JsStoreMethods
     {

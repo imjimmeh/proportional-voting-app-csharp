@@ -1,6 +1,6 @@
 ﻿using Jim.Core.Store.Models.Options;
 
-namespace Jim.Blazor.Store.Models
+namespace Jim.Blazor.Store.Models.Options
 {
     public record BlazorStoreOptions : StoreOptions
     {
@@ -11,6 +11,8 @@ namespace Jim.Blazor.Store.Models
         protected BlazorStoreOptions(StoreType storeType, StoreOptions original) : base(original)
         {
         }
+
+        public string GetMethodPath(JsStoreMethod method) => StoreToUse + "." + method.ToMethodName();
 
         public string GetMethodPath(string methodName) => StoreToUse + "." + methodName;
     }
