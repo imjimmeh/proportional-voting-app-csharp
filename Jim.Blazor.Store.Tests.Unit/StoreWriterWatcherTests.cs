@@ -1,6 +1,7 @@
 ﻿using Jim.Blazor.Store.Models.Events;
 using Jim.Blazor.Store.Models.Options;
 using Jim.Blazor.Store.Models.Services;
+using Jim.Blazor.Store.Models.Tests;
 using Jim.Blazor.Store.Services;
 using NUnit.Framework;
 using System;
@@ -18,25 +19,39 @@ namespace Jim.Blazor.Store.Tests.Unit
 
         private const int TIME_TO_WAIT_PER_WRITE_IN_MS = 25;
         private const int CONCURRNECY_TEST_AMOUNT = 100;
-        private IBlazorStoreWriterWatcher? _watcher;
+        private IBlazorStoreWriterWatcher<TestStoreModel>? _watcher;
 
-        private ConcurrentBag<BlazorStoreEntryChangedEventArgs>? _returnedValues;
+        private ConcurrentBag<BlazorStoreEntryChangedEventArgs<TestStoreModel?>>? _returnedValues;
 
         public StoreWriterWatcherTests() : base(new BlazorStoreOptions(StoreType.Local))
         {
         }
 
-        public IBlazorStoreWriterWatcher Watcher => _watcher ?? throw new ArgumentNullException(nameof(_watcher));
+        public IBlazorStoreWriterWatcher<TestStoreModel> Watcher => _watcher ?? throw new ArgumentNullException(nameof(_watcher));
 
         [SetUp]
         public void Setup()
         {
-            _watcher = new StoreWriterWatcher(Options, JS);
+
+            _watcher = Writer is IBlazorStoreWriter blazorWriter ?
+                new StoreWriterWatcher<TestStoreModel>(blazorWriter) :
+                throw new InvalidCastException($"{nameof(Writer)} is not of expected type {typeof(IBlazorStoreWriter)} - is {Writer.GetType()}");
+
             SetWriter(Watcher);
 
             Watcher.OnStoreWrite += OnStoreChange;
 
-            _returnedValues = new ConcurrentBag<BlazorStoreEntryChangedEventArgs>();
+            if (_returnedValues != null)
+                _returnedValues.Clear();
+
+            _returnedValues = new ConcurrentBag<BlazorStoreEntryChangedEventArgs<TestStoreModel?>>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Watcher.OnStoreWrite -= OnStoreChange;
+            _returnedValues?.Clear();
         }
 
         [Test, Order(1)]
@@ -47,54 +62,54 @@ namespace Jim.Blazor.Store.Tests.Unit
             Thread.Sleep(TIME_TO_WAIT_PER_WRITE_IN_MS);
 
             var firstInBag = _returnedValues?.FirstOrDefault();
-            ValidateResult(key, firstInBag);
+            ValidateResult(key, value, firstInBag);
         }
 
 
         [Test, Order(2)]
         public async Task Watcher_Should_Fire_On_Multiple_Changes()
         {
-            var keys = GenerateKeys();
-
-            var tasks = keys.AsParallel().Select(async key => await SetKeyValue(key, GenerateRandomValue())).ToArray();
+            var keyValuePairs = GenerateKeysAndValues();
+            var tasks = keyValuePairs.AsParallel().Select(async key => await SetKeyValue(key.Key, key.Value)).ToArray();
 
             var complete = Task.WaitAll(tasks, TimeSpan.FromSeconds(10));
 
             Thread.Sleep(1000);
 
-            Assert.True(_returnedValues.Count == keys.Count, $"Expected {keys.Count} returned values but received {_returnedValues.Count}");
+            Assert.True(_returnedValues.Count == keyValuePairs.Count, $"Expected {keyValuePairs.Count} returned values but received {_returnedValues.Count}");
 
-            foreach (var key in keys)
+            foreach ((string key, TestStoreModel value) in keyValuePairs)
             {
                 var matchingValue = _returnedValues.Where(value => value.Key == key).FirstOrDefault();
 
                 Assert.NotNull(matchingValue);
-                ValidateResult(key, matchingValue);
+                ValidateResult(key, value, matchingValue);
             }
         }
 
-        private void ValidateResult(string? key, BlazorStoreEntryChangedEventArgs? result)
+        private void ValidateResult(string? key, TestStoreModel expectedValue, BlazorStoreEntryChangedEventArgs<TestStoreModel?> result)
         {
             Assert.NotNull(result);
 
             Assert.AreEqual(result!.Key, key);
-            Assert.AreEqual(result.Method, JsStoreMethod.Get);
+            Assert.AreEqual(result.Method, JsStoreMethod.Set);
             Assert.AreEqual(result.StoreType, Watcher.Options.StoreToUse.ToStoreType());
+            Assert.AreEqual(expectedValue, result.NewValue);
         }
 
-        private static HashSet<string> GenerateKeys()
+        private static Dictionary<string, TestStoreModel> GenerateKeysAndValues()
         {
-            var keys = new HashSet<string>(CONCURRNECY_TEST_AMOUNT);
+            var keyValuePairs = new Dictionary<string, TestStoreModel>();
 
             for (var x = 0; x < CONCURRNECY_TEST_AMOUNT; x++)
             {
-                keys.Add(GenerateRandomKey());
+                keyValuePairs.Add(GenerateRandomKey(), GenerateRandomValue());
             }
 
-            return keys;
+            return keyValuePairs;
         }
 
-        private void OnStoreChange(object? sender, BlazorStoreEntryChangedEventArgs args)
+        private void OnStoreChange(object? sender, BlazorStoreEntryChangedEventArgs<TestStoreModel> args)
         {
             bool haveLock = false;
 

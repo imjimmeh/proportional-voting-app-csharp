@@ -1,9 +1,12 @@
 ﻿@page "/storagetest"
+@using Jim.Blazor.Store.Models.Events
+@using Jim.Blazor.Store.Models.Services
 @using Jim.Blazor.Store.Models.Tests
 @using Jim.Core.Store.Models.Services
 
-@inject IStoreWriter storeWriter
-@inject IStoreReader storeReader
+@inject IBlazorStoreWriterWatcher<TestStoreModel> storeWriter
+@inject IBlazorStoreReader storeReader
+@inject IJSRuntime JS
 
 <h3>StorageTest</h3>
 
@@ -28,6 +31,12 @@
 
     string value = "";
 
+    protected override Task OnInitializedAsync()
+    {
+        storeWriter.OnStoreWrite += OnStoreWrite;
+        return base.OnInitializedAsync();
+    }
+
     async Task GetFromStore()
     {
         var result = await storeReader.GetAsync<TestStoreModel>(key);
@@ -38,6 +47,12 @@
     async Task SetStore()
     {
         var result = await storeWriter.WriteAsync(key, GenerateStore());
+    }
+
+    async void OnStoreWrite(object? sender, BlazorStoreEntryChangedEventArgs args)
+    {
+        var value = await storeReader.GetAsync<TestStoreModel>(args.Key);
+        await JS.InvokeVoidAsync("alert", $"{args.Key} was changed to {value}");
     }
 
     TestStoreModel GenerateStore() => new TestStoreModel { TestString = value };

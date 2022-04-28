@@ -1,8 +1,19 @@
+using Jim.Blazor.Store.Models.Options;
+using Jim.Blazor.Store.Models.Services;
+using Jim.Blazor.Store.Models.Tests;
+using Jim.Blazor.Store.Services;
+using Jim.Blazor.Store.Services.Stores;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddScoped<IBlazorStoreReader, StoreReader>();
+
+builder.Services.AddScoped<IBlazorStoreWriterWatcher<TestStoreModel>, StoreWriterWatcher<TestStoreModel>>();
+builder.Services.AddSingleton(new BlazorStoreOptions(StoreType.Local));
 
 var app = builder.Build();
 

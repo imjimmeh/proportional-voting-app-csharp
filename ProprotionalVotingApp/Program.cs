@@ -1,5 +1,6 @@
 using Jim.Blazor.Store.Models;
 using Jim.Blazor.Store.Models.Options;
+using Jim.Blazor.Store.Models.Services;
 using Jim.Blazor.Store.Services.Stores;
 using Jim.Core.Store.Models.Services;
 using Microsoft.AspNetCore.Components;
@@ -18,8 +19,8 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddDbContext<IVotingRepository, VotingRepository>(options => options.UseSqlServer("Data Source=192.168.1.161;Initial Catalog=VotingApp;Persist Security Info=True;User ID=SA;Password=r1pz33z!l0l"));
 
 builder.Services.AddSingleton(new BlazorStoreOptions(StoreType.Local));
-builder.Services.AddScoped<IStoreReader, StoreReader>();
-builder.Services.AddScoped<IStoreWriter, StoreWriter>();
+builder.Services.AddScoped<IBlazorStoreReader, StoreReader>();
+builder.Services.AddScoped<IBlazorStoreWriter, StoreWriter>();
 
 var app = builder.Build();
 
