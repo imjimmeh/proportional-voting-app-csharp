@@ -11,5 +11,7 @@ namespace Jim.Blazor.Store.Models
         protected BlazorStoreOptions(StoreType storeType, StoreOptions original) : base(original)
         {
         }
+
+        public string GetMethodPath(string methodName) => StoreToUse + "." + methodName;
     }
 }

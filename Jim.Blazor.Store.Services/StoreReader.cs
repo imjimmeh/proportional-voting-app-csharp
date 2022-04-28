@@ -7,11 +7,22 @@ namespace Jim.Blazor.Store.Services
 {
     public class StoreReader : StoreService, IStoreReader
     {
-        private const string GET_ITEM = "getItem";
-        private string GET_ITEM_PATH => _options.StoreToUse + "." + GET_ITEM;
+        private readonly string _getItemMethod = JsStoreMethod.Get.ToMethodName();
+        private string _getItemPath;
 
         public StoreReader(BlazorStoreOptions options, IJSRuntime js) : base(options, js)
         {
+        }
+
+        public string GetItemPath
+        { 
+            get 
+            {
+                if (_getItemPath == null)
+                    _getItemPath = _options.GetMethodPath(_getItemMethod);
+
+                return _getItemPath;
+            }
         }
 
         public async Task<T?> GetAsync<T>(string key)
@@ -40,7 +51,7 @@ namespace Jim.Blazor.Store.Services
         {
             try
             {
-                string result = await _js.InvokeAsync<string>(GET_ITEM_PATH, key);
+                string result = await _js.InvokeAsync<string>(GetItemPath, key);
 
                 if (string.IsNullOrEmpty(result))
                     throw new KeyNotFoundException($"Could not find key in store, or value found was null or empty");

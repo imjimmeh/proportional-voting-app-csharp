@@ -1,33 +1,34 @@
-﻿namespace Jim.Blazor.Store.Models
+﻿using Jim.Core.Helpers;
+
+namespace Jim.Blazor.Store.Models
 {
     public static class StoreTypes
     {
-        private static Dictionary<StoreType, string> _storeTypes = new Dictionary<StoreType, string>
+        public const string LOCAL = "localStorage";
+        public const string SESSION = "sessionStorage";
+
+        private static Dictionary<StoreType, string>? _dictionary;
+
+        private static IEnumConverter<StoreType, string> _converter
+            = new EnumConverter<StoreType, string>(Stores,
+                                                   storeType => storeType == StoreType.None);
+
+        public static Dictionary<StoreType, string> Stores
         {
-            { StoreType.Local, "localStorage" }, {StoreType.Session, "sessionStorage"}
-        };
-
-        public static string ToJSStoreName(this StoreType storeType)
-        {
-            if (storeType == StoreType.None)
-                throw new ArgumentNullException(nameof(storeType));
-
-            if (_storeTypes.TryGetValue(storeType, out string? type))
-                return type ?? throw new Exception($"Found matching value for {storeType} but is null");
-
-            throw new Exception($"Could not find right mapping for {storeType}");
-        }
-
-        public static StoreType ToStoreType(this string storeType)
-        {
-            foreach(var type in _storeTypes)
+            get
             {
-                if (Equals(type, storeType))
-                    return type.Key;
+                if (_dictionary == null)
+                    _dictionary = InitialiseDictionary();
+
+                return _dictionary;
             }
-
-            throw new Exception($"Could not find right mapping for {storeType}");
         }
+        public static string ToJSStoreName(this StoreType storeType) =>_converter.ToValue(storeType);
 
+        public static StoreType ToStoreType(this string storeType) => _converter.ToEnum(storeType);
+
+        private static Dictionary<StoreType, string> InitialiseDictionary() => new Dictionary<StoreType, string> {
+            { StoreType.Local, LOCAL }, { StoreType.Session, SESSION} 
+        };
     }
 }
