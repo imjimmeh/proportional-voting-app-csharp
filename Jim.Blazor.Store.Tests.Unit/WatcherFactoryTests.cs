@@ -67,7 +67,7 @@ namespace Jim.Blazor.Store.Tests.Unit
 
             Assert.NotNull(first);
 
-            Assert.AreEqual(first.Key, key);
+            Assert.AreEqual(first!.Key, key);
 
             if (first is not BlazorStoreEntryChangedEventArgs<TestStoreModel?> rightArgs)
                 Assert.Fail($"Received value is not type {typeof(BlazorStoreEntryChangedEventArgs<TestStoreModel?>)} - received {first.GetType()}");

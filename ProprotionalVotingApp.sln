@@ -9,33 +9,35 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProportionalVotingApp.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProportionalVotingApp.DatabaseService", "ProportionalVotingApp.DatabaseService\ProportionalVotingApp.DatabaseService.csproj", "{27DF104C-1947-4E5B-A25E-701CC6A753E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Blazor.Store.Services", "Jim.Blazor.Store.Services\Jim.Blazor.Store.Services.csproj", "{DEF1A5C3-586E-4264-827F-3DEECE265906}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Blazor.Store.Services", "Jim.Blazor.Store.Services\Jim.Blazor.Store.Services.csproj", "{DEF1A5C3-586E-4264-827F-3DEECE265906}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Store.Models", "Jim.Core.Store.Models\Jim.Core.Store.Models.csproj", "{D79FC27C-FAC5-40C0-A0A9-242D136C115A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Store.Models", "Jim.Core.Store.Models\Jim.Core.Store.Models.csproj", "{D79FC27C-FAC5-40C0-A0A9-242D136C115A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Extensions", "Jim.Core.Extensions\Jim.Core.Extensions.csproj", "{567B9C09-B634-43D4-8E7D-6C67152AFE2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Extensions", "Jim.Core.Extensions\Jim.Core.Extensions.csproj", "{567B9C09-B634-43D4-8E7D-6C67152AFE2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Blazor.Store.Models", "Jim.Blazor.Store.Models\Jim.Blazor.Store.Models.csproj", "{8105C372-BE8D-4CBC-8468-E914529C101C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Blazor.Store.Models", "Jim.Blazor.Store.Models\Jim.Blazor.Store.Models.csproj", "{8105C372-BE8D-4CBC-8468-E914529C101C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDB60F63-F33F-43C3-B8AF-077F8BFB31B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Blazor.Tests.Functional", "Jim.Blazor.Tests.Functional\Jim.Blazor.Tests.Functional.csproj", "{5F6A24B8-2BDF-41AD-8224-BB5A2A8B7CA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Blazor.Tests.Functional", "Jim.Blazor.Tests.Functional\Jim.Blazor.Tests.Functional.csproj", "{5F6A24B8-2BDF-41AD-8224-BB5A2A8B7CA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Blazor.Components", "Jim.Blazor.Components\Jim.Blazor.Components.csproj", "{BD86721D-E21A-4D8C-A1C3-AE1A29EE4820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Blazor.Components", "Jim.Blazor.Components\Jim.Blazor.Components.csproj", "{BD86721D-E21A-4D8C-A1C3-AE1A29EE4820}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{19692050-C042-4CFE-8D83-620D068EA271}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AF2AF6AB-6DA1-4B6B-AC5B-ECCBC5358340}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Blazor.Store.Tests.Unit", "Jim.Blazor.Store.Tests.Unit\Jim.Blazor.Store.Tests.Unit.csproj", "{16AB8842-67DB-42BB-A00B-7DC3E9256D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Blazor.Store.Tests.Unit", "Jim.Blazor.Store.Tests.Unit\Jim.Blazor.Store.Tests.Unit.csproj", "{16AB8842-67DB-42BB-A00B-7DC3E9256D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Helpers", "Jim.Core.Helpers\Jim.Core.Helpers.csproj", "{06A77BB5-3C8F-4472-B5F8-215748FDE175}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Helpers", "Jim.Core.Helpers\Jim.Core.Helpers.csproj", "{06A77BB5-3C8F-4472-B5F8-215748FDE175}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stores", "Stores", "{5D8AE5F9-F3FE-4336-8AA8-8D60AE3AC71B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Tests.Base", "Jim.Core.Tests.Base\Jim.Core.Tests.Base.csproj", "{58376476-85F6-45C3-A9C6-F219B75FFD10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Tests.Base", "Jim.Core.Tests.Base\Jim.Core.Tests.Base.csproj", "{58376476-85F6-45C3-A9C6-F219B75FFD10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Multithreading", "Jim.Core.Multithreading\Jim.Core.Multithreading.csproj", "{9106CCC7-AA95-425E-8EF0-698A6F04137C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{58376476-85F6-45C3-A9C6-F219B75FFD10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58376476-85F6-45C3-A9C6-F219B75FFD10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58376476-85F6-45C3-A9C6-F219B75FFD10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9106CCC7-AA95-425E-8EF0-698A6F04137C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9106CCC7-AA95-425E-8EF0-698A6F04137C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9106CCC7-AA95-425E-8EF0-698A6F04137C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9106CCC7-AA95-425E-8EF0-698A6F04137C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{16AB8842-67DB-42BB-A00B-7DC3E9256D89} = {5D8AE5F9-F3FE-4336-8AA8-8D60AE3AC71B}
 		{06A77BB5-3C8F-4472-B5F8-215748FDE175} = {A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}
 		{58376476-85F6-45C3-A9C6-F219B75FFD10} = {EDB60F63-F33F-43C3-B8AF-077F8BFB31B4}
+		{9106CCC7-AA95-425E-8EF0-698A6F04137C} = {A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C88AA86A-CE8F-4C4A-A304-8746A19AB1A6}

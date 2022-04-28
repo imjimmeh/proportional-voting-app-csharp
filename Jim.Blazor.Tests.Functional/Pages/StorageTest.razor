@@ -51,7 +51,7 @@
 
     async Task SetStore()
     {
-        var result = await watcher.WriteAsync(key, GenerateStore());
+        var result = await watcher!.WriteAsync(key, GenerateStore());
     }
 
     async void OnStoreWrite(object? sender, BlazorStoreEntryChangedEventArgs args)

@@ -3,6 +3,7 @@ using Jim.Blazor.Store.Models.Options;
 using Jim.Blazor.Store.Models.Services;
 using Jim.Blazor.Store.Models.Tests;
 using Jim.Blazor.Store.Services;
+using Jim.Core.Multithreading;
 using NUnit.Framework;
 using System;
 using System.Collections.Concurrent;
@@ -15,11 +16,11 @@ namespace Jim.Blazor.Store.Tests.Unit
 {
     public class StoreWriterWatcherTests : BlazorStoreServicesTestsBase
     {
-        private SpinLock _lock = new SpinLock();
-
         private const int TIME_TO_WAIT_PER_WRITE_IN_MS = 25;
         private const int CONCURRNECY_TEST_AMOUNT = 100;
+
         private IBlazorStoreWriterWatcher<TestStoreModel?>? _watcher;
+        private ISpinLocker _spinLocker = new SpinLocker();
 
         private ConcurrentBag<BlazorStoreEntryChangedEventArgs<TestStoreModel?>>? _returnedValues;
 
@@ -116,21 +117,7 @@ namespace Jim.Blazor.Store.Tests.Unit
 
         private void OnStoreChange(object? sender, BlazorStoreEntryChangedEventArgs<TestStoreModel?> args)
         {
-            bool haveLock = false;
-
-            try
-            {
-                _lock.Enter(ref haveLock);
-                _returnedValues?.Add(args);
-            }
-            catch(Exception ex)
-            {
-                Assert.Fail(ex.ToString());
-            }
-            finally
-            {
-                _lock.Exit();
-            }
+            _spinLocker.LockThenDo(() => _returnedValues?.Add(args));
         }
     }
 }
