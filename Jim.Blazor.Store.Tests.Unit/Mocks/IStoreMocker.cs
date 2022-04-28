@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Jim.Blazor.Store.Tests.Unit
+namespace Jim.Blazor.Store.Tests.Unit.Mocks
 {
     public interface IStoreMocker
     {

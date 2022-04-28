@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Jim.Blazor.Store.Models\Jim.Blazor.Store.Models.csproj" />
     <ProjectReference Include="..\Jim.Blazor.Store.Services\Jim.Blazor.Store.Services.csproj" />
-    <ProjectReference Include="..\Jim.Core.Helpers\Jim.Core.Helpers.csproj" />
     <ProjectReference Include="..\Jim.Core.Tests.Base\Jim.Core.Tests.Base.csproj" />
   </ItemGroup>
 

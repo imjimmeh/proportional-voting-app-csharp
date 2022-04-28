@@ -1,6 +1,6 @@
 using Jim.Blazor.Store.Models;
 using Jim.Blazor.Store.Models.Options;
-using Jim.Blazor.Store.Services;
+using Jim.Blazor.Store.Services.Stores;
 using Jim.Core.Store.Models.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;

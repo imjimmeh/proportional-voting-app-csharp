@@ -1,4 +1,4 @@
-﻿namespace Jim.Core.Helpers
+﻿namespace Jim.Core.Helpers.Enums
 {
     public class EnumConverter<TEnum, TValue> : IEnumConverter<TEnum, TValue>
     {
@@ -27,7 +27,7 @@
         {
             foreach (var type in _mappings)
             {
-                if (string.Equals(type.Value, toConvert))
+                if (Equals(type.Value, toConvert))
                     return type.Key;
             }
 

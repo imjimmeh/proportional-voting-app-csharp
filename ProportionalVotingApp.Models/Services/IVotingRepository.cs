@@ -1,4 +1,5 @@
-﻿using ProportionalVotingApp.Models.DTOs;
+﻿using ProportionalVotingApp.Models.Database;
+using ProportionalVotingApp.Models.DTOs;
 using System.Linq.Expressions;
 
 namespace ProportionalVotingApp.Models.Services

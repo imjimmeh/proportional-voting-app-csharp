@@ -1,20 +1,21 @@
 ﻿using Jim.Blazor.Store.Models.Options;
+using Jim.Blazor.Store.Models.Services;
 using Jim.Core.Extensions;
-using Jim.Core.Store.Models.Services;
 using Microsoft.JSInterop;
-using System.Text.Json;
-namespace Jim.Blazor.Store.Services
+
+namespace Jim.Blazor.Store.Services.Stores
 {
-    public class StoreWriter : StoreService, IStoreWriter
+    public class StoreWriter : StoreService, IBlazorStoreWriter
     {
-        private const string SET_ITEM = "setItem";
-        private string SET_ITEM_PATH => _options.StoreToUse + "." + SET_ITEM;
+        private const JsStoreMethod METHOD = JsStoreMethod.Set;
+
+        private string SET_ITEM_PATH => _options.GetMethodPath(METHOD);
 
         public StoreWriter(BlazorStoreOptions options, IJSRuntime js) : base(options, js)
         {
         }
 
-        public async Task<bool> WriteAsync<T>(string key, T value) where T : class
+        public virtual async Task<bool> WriteAsync<T>(string key, T value) where T : class
         {
             try
             {

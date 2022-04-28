@@ -1,9 +1,8 @@
 ﻿using ProportionalVotingApp.Models.Base;
-using ProportionalVotingApp.Models.Database;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProportionalVotingApp.Models
+namespace ProportionalVotingApp.Models.Database
 {
     [Table("Votes")]
     public class VoteDbEntity : IVote<VoteOptionDbEntity>

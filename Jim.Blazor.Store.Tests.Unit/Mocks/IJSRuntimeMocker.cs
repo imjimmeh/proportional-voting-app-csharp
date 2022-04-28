@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Jim.Blazor.Store.Tests.Unit
+namespace Jim.Blazor.Store.Tests.Unit.Mocks
 {
     public class IJSRuntimeMocker : IJSRuntime
     {

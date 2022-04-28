@@ -3,7 +3,7 @@ using Jim.Core.Extensions;
 using Jim.Core.Store.Models.Services;
 using Microsoft.JSInterop;
 
-namespace Jim.Blazor.Store.Services
+namespace Jim.Blazor.Store.Services.Stores
 {
     public class StoreReader : StoreService, IStoreReader
     {
@@ -15,8 +15,8 @@ namespace Jim.Blazor.Store.Services
         }
 
         public string GetItemPath
-        { 
-            get 
+        {
+            get
             {
                 if (_getItemPath == null)
                     _getItemPath = _options.GetMethodPath(_getItemMethod);

@@ -1,4 +1,4 @@
-﻿namespace Jim.Core.Helpers
+﻿namespace Jim.Core.Helpers.Enums
 {
     public interface IEnumConverter<TEnum, TValue>
     {

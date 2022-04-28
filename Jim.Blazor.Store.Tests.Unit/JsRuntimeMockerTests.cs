@@ -1,4 +1,5 @@
 ﻿using Jim.Blazor.Store.Models.Options;
+using Jim.Blazor.Store.Tests.Unit.Mocks;
 using Jim.Core.Helpers.Randoms;
 using Microsoft.JSInterop;
 using NUnit.Framework;

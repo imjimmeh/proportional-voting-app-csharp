@@ -1,4 +1,4 @@
-﻿using Jim.Core.Helpers;
+﻿using Jim.Core.Helpers.Enums;
 
 namespace Jim.Blazor.Store.Models.Options
 {

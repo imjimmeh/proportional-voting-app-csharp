@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProportionalVotingApp.Models;
 using ProportionalVotingApp.Models.Database;
 using ProportionalVotingApp.Models.DTOs;
 using ProportionalVotingApp.Models.Services;
