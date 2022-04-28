@@ -12,14 +12,14 @@ namespace Jim.Blazor.Store.Tests.Unit
     {
         private readonly BlazorStoreOptions _options = new BlazorStoreOptions(StoreType.Local);
         private readonly IStoreMocker _store = new StoreMocker();
-        private IJSRuntime? _runtime;
+        private IJSRuntime? _runtime = null;
 
         [SetUp]
         public void Setup()
         {
         }
 
-        public IJSRuntime JS => _runtime ?? new IJSRuntimeMocker(_store);
+        public IJSRuntime JS => _runtime ??= new IJSRuntimeMocker(_store);
 
         [Test, Order(1)]
         public async Task Should_SetItemAsync()

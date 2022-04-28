@@ -4,8 +4,8 @@ using Jim.Blazor.Store.Models.Services;
 
 namespace Jim.Blazor.Store.Services
 {
-    public class StoreWriterWatcher<TValue> : IBlazorStoreWriter, IBlazorStoreWriterWatcher<TValue>
-        where TValue : class
+    public class StoreWriterWatcher<TValue> : IBlazorStoreWriter, IBlazorStoreWriterWatcher<TValue?>
+        where TValue : class?
     {
         private readonly IBlazorStoreWriter _writer;
 
@@ -16,9 +16,9 @@ namespace Jim.Blazor.Store.Services
 
         public BlazorStoreOptions Options => _writer.Options;
 
-        public event EventHandler<BlazorStoreEntryChangedEventArgs<TValue>>? OnStoreWrite;
+        public event EventHandler<BlazorStoreEntryChangedEventArgs<TValue?>>? OnStoreWrite;
 
-        public async Task<bool> WriteAsync(string key, TValue value)
+        public async Task<bool> WriteAsync(string key, TValue? value)
         {
 
             try
@@ -35,11 +35,12 @@ namespace Jim.Blazor.Store.Services
                 throw;
             }
         }
-        public Task<bool> WriteAsync<T>(string key, T value) where T : class
+        public Task<bool> WriteAsync<T>(string key, T? value)
+            where T : class?
             => value is TValue tValue ? WriteAsync(key, tValue) : throw new InvalidCastException($"{nameof(value)} is not expected type {typeof(TValue)}, but is {typeof(T)}");
 
-        private BlazorStoreEntryChangedEventArgs<TValue> GenerateEventArgs(string key, TValue value)
-            => new BlazorStoreEntryChangedEventArgs<TValue>
+        private BlazorStoreEntryChangedEventArgs<TValue?> GenerateEventArgs(string key, TValue? value)
+            => new BlazorStoreEntryChangedEventArgs<TValue?>
             {
                 Key = key,
                 Method = JsStoreMethod.Set,

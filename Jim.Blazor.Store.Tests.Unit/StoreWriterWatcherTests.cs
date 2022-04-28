@@ -19,7 +19,7 @@ namespace Jim.Blazor.Store.Tests.Unit
 
         private const int TIME_TO_WAIT_PER_WRITE_IN_MS = 25;
         private const int CONCURRNECY_TEST_AMOUNT = 100;
-        private IBlazorStoreWriterWatcher<TestStoreModel>? _watcher;
+        private IBlazorStoreWriterWatcher<TestStoreModel?>? _watcher;
 
         private ConcurrentBag<BlazorStoreEntryChangedEventArgs<TestStoreModel?>>? _returnedValues;
 
@@ -27,14 +27,14 @@ namespace Jim.Blazor.Store.Tests.Unit
         {
         }
 
-        public IBlazorStoreWriterWatcher<TestStoreModel> Watcher => _watcher ?? throw new ArgumentNullException(nameof(_watcher));
+        public IBlazorStoreWriterWatcher<TestStoreModel?> Watcher => _watcher ?? throw new ArgumentNullException(nameof(_watcher));
 
         [SetUp]
         public void Setup()
         {
 
             _watcher = Writer is IBlazorStoreWriter blazorWriter ?
-                new StoreWriterWatcher<TestStoreModel>(blazorWriter) :
+                new StoreWriterWatcher<TestStoreModel?>(blazorWriter) :
                 throw new InvalidCastException($"{nameof(Writer)} is not of expected type {typeof(IBlazorStoreWriter)} - is {Writer.GetType()}");
 
             SetWriter(Watcher);

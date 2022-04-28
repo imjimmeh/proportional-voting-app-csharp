@@ -15,6 +15,6 @@ namespace Jim.Core.Store.Models.Services
         /// <param name="key">Key ID</param>
         /// <param name="value"></param>
         /// <returns></returns>
-        Task<bool> WriteAsync<T>(string key, T value) where T : class;
+        Task<bool> WriteAsync<T>(string key, T? value) where T : class?;
     }
 }

@@ -12,14 +12,33 @@ namespace Jim.Blazor.Store.Tests.Unit.Mocks
             _stores = new Dictionary<string, string>(capacity);
         }
 
-        public Task<bool> SetItem(string key, string value)
+        public Task<bool> SetItem(string key, string? value)
         {
-            if (_stores.ContainsKey(key))
-                _stores[key] = value;
-            else
-                _stores.Add(key, value);
+            bool keyExists = _stores.ContainsKey(key);
 
+            if (keyExists)
+            {
+                AddOrUpdate(key, value);
+            }
+            else
+            {
+                AddIfNotNull(key, value);
+            }
             return Task.FromResult(true);
+        }
+
+        private void AddIfNotNull(string key, string? value)
+        {
+            if (!string.IsNullOrEmpty(value))
+                _stores.Add(key, value);
+        }
+
+        private void AddOrUpdate(string key, string? value)
+        {
+            if (string.IsNullOrEmpty(value))
+                _stores.Remove(key);
+            else
+                _stores[key] = value;
         }
 
         public async Task<string?> GetItem(string key)
