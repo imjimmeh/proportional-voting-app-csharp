@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.JSInterop" Version="6.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jim.Blazor.Store.Models\Jim.Blazor.Store.Models.csproj" />
+    <ProjectReference Include="..\Jim.Core.Store.Models\Jim.Core.Store.Models.csproj" />
+  </ItemGroup>
+
+</Project>

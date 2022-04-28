@@ -1,0 +1,43 @@
+﻿@page "/storagetest"
+@using Jim.Core.Store.Models.Services
+
+@inject IStoreWriter storeWriter
+@inject IStoreReader storeReader
+
+<h3>StorageTest</h3>
+
+<div id="storeTest">
+        <div class="form-group">
+        <label for="storeKey">Key:</label>
+        <input id="storeKey" type="text" @bind-value="@key" />
+    </div>
+
+    <div class="form-group">
+        <label for="storeValue">Value:</label>
+        <input id="storeValue" type="text" @bind-value="@value" />
+    </div>
+
+    <button type="button" @onclick="@GetFromStore">Get</button>
+
+    <button type="button" @onclick="@SetStore">Set</button>
+</div>
+
+@code {
+    string key = "";
+
+    string value = "";
+
+    async Task GetFromStore()
+    {
+        var result = await storeReader.GetAsync<TestingStore>(key);
+
+        value = result?.TestingString ?? "";
+    }
+
+    async Task SetStore()
+    {
+        var result = await storeWriter.WriteAsync(key, GenerateStore());
+    }
+
+    TestingStore GenerateStore() => new TestingStore { TestingString = value };
+}

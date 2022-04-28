@@ -1,0 +1,68 @@
+﻿@page "/login"
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
+@using ProportionalVotingApp.Models.DTOs
+@using System.Security.Claims
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject SignInManager<VoteUser> SignInManager
+@inject NavigationManager Navigator
+
+<h3>Login</h3>
+
+@if(!loaded)
+{
+    <p>Loading...</p>
+}
+else
+{
+    if(!isAuthenticated)
+    {
+        <div class="form-group">
+            <label for="username" class="form-control">Please input a username:</label>
+            <input id="username" class="form-control" @bind-value="@username" placeholder="Username"/>
+
+            <button type="submit" @onchange="Login" class="form-control">Login</button>
+        </div>
+    }
+    else
+    {
+        <p>Welcome @user.Username!</p>
+    }
+}
+@code {
+    bool loaded = false;
+
+    VoteUser user = new VoteUser();
+
+    string username = "";
+    bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authenticatedUser = authState.User;
+
+        var isAuthenticated = authenticatedUser?.Identity?.IsAuthenticated;
+        this.isAuthenticated = isAuthenticated.HasValue && isAuthenticated.Value;
+
+        loaded = true;
+
+        if (this.isAuthenticated)
+        {
+            user = new VoteUser
+            {
+                Username = authenticatedUser?.Identity?.Name ?? ""
+            };   
+        }
+    }
+
+    protected async Task Login()
+    {
+        if(!isAuthenticated)
+        {
+            await SignInManager.SignInAsync(user, true);
+            Navigator.NavigateTo("/");
+        }
+    }
+}

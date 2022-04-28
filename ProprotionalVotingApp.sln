@@ -9,6 +9,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProportionalVotingApp.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProportionalVotingApp.DatabaseService", "ProportionalVotingApp.DatabaseService\ProportionalVotingApp.DatabaseService.csproj", "{27DF104C-1947-4E5B-A25E-701CC6A753E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Blazor.Store.Services", "Jim.Blazor.Store.Services\Jim.Blazor.Store.Services.csproj", "{DEF1A5C3-586E-4264-827F-3DEECE265906}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stores", "Stores", "{59951AAB-E2E0-4261-B4D7-44A4D8FDA9E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Store.Models", "Jim.Core.Store.Models\Jim.Core.Store.Models.csproj", "{D79FC27C-FAC5-40C0-A0A9-242D136C115A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Extensions", "Jim.Core.Extensions\Jim.Core.Extensions.csproj", "{567B9C09-B634-43D4-8E7D-6C67152AFE2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Blazor.Store.Models", "Jim.Blazor.Store.Models\Jim.Blazor.Store.Models.csproj", "{8105C372-BE8D-4CBC-8468-E914529C101C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDB60F63-F33F-43C3-B8AF-077F8BFB31B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +41,31 @@ Global
 		{27DF104C-1947-4E5B-A25E-701CC6A753E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27DF104C-1947-4E5B-A25E-701CC6A753E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27DF104C-1947-4E5B-A25E-701CC6A753E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF1A5C3-586E-4264-827F-3DEECE265906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF1A5C3-586E-4264-827F-3DEECE265906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF1A5C3-586E-4264-827F-3DEECE265906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF1A5C3-586E-4264-827F-3DEECE265906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D79FC27C-FAC5-40C0-A0A9-242D136C115A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D79FC27C-FAC5-40C0-A0A9-242D136C115A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D79FC27C-FAC5-40C0-A0A9-242D136C115A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D79FC27C-FAC5-40C0-A0A9-242D136C115A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{567B9C09-B634-43D4-8E7D-6C67152AFE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{567B9C09-B634-43D4-8E7D-6C67152AFE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{567B9C09-B634-43D4-8E7D-6C67152AFE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{567B9C09-B634-43D4-8E7D-6C67152AFE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8105C372-BE8D-4CBC-8468-E914529C101C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8105C372-BE8D-4CBC-8468-E914529C101C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8105C372-BE8D-4CBC-8468-E914529C101C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8105C372-BE8D-4CBC-8468-E914529C101C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DEF1A5C3-586E-4264-827F-3DEECE265906} = {59951AAB-E2E0-4261-B4D7-44A4D8FDA9E4}
+		{D79FC27C-FAC5-40C0-A0A9-242D136C115A} = {59951AAB-E2E0-4261-B4D7-44A4D8FDA9E4}
+		{567B9C09-B634-43D4-8E7D-6C67152AFE2E} = {A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}
+		{8105C372-BE8D-4CBC-8468-E914529C101C} = {59951AAB-E2E0-4261-B4D7-44A4D8FDA9E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C88AA86A-CE8F-4C4A-A304-8746A19AB1A6}
