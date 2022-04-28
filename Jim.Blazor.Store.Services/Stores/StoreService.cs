@@ -1,10 +1,10 @@
 ﻿using Jim.Blazor.Store.Models.Options;
-using Jim.Blazor.Store.Models.Services;
+using Jim.Core.Store.Models.Services;
 using Microsoft.JSInterop;
 
 namespace Jim.Blazor.Store.Services.Stores
 {
-    public abstract class StoreService : IStoreService
+    public abstract class StoreService : IStoreService<BlazorStoreOptions>
     {
         protected readonly IJSRuntime _js;
         protected readonly BlazorStoreOptions _options;

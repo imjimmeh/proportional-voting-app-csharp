@@ -1,11 +1,11 @@
 ﻿using Jim.Blazor.Store.Models.Options;
-using Jim.Blazor.Store.Models.Services;
 using Jim.Core.Extensions;
+using Jim.Core.Store.Models.Services;
 using Microsoft.JSInterop;
 
 namespace Jim.Blazor.Store.Services.Stores
 {
-    public class StoreWriter : StoreService, IBlazorStoreWriter
+    public class StoreWriter : StoreService, IStoreWriter
     {
         private const JsStoreMethod METHOD = JsStoreMethod.Set;
 
