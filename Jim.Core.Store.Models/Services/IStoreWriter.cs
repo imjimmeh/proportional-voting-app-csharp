@@ -1,9 +1,12 @@
-﻿namespace Jim.Core.Store.Models.Services
+﻿using Jim.Core.Store.Models.Options;
+
+namespace Jim.Core.Store.Models.Services
 {
     /// <summary>
     /// Service that manages writing to a store
     /// </summary>
-    public interface IStoreWriter
+    public interface IStoreWriter<TOptions> : IStoreService<TOptions>
+        where TOptions : StoreOptions
     {
         /// <summary>
         /// Writes the given value to the store under the given key

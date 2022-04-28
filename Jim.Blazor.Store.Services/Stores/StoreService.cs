@@ -1,18 +1,22 @@
 ﻿using Jim.Blazor.Store.Models.Options;
-using Jim.Core.Store.Models.Services;
+using Jim.Blazor.Store.Models.Services;
 using Microsoft.JSInterop;
 
 namespace Jim.Blazor.Store.Services.Stores
 {
-    public abstract class StoreService : IStoreService<BlazorStoreOptions>
+    public abstract class StoreService : IBlazorStoreService
     {
         protected readonly IJSRuntime _js;
         protected readonly BlazorStoreOptions _options;
 
-        public StoreService(BlazorStoreOptions options, IJSRuntime js)
+        protected readonly string methodPath;
+
+        public StoreService(JsStoreMethod method, BlazorStoreOptions options, IJSRuntime js)
         {
             _js = js ?? throw new ArgumentNullException(nameof(js));
             _options = options ?? throw new ArgumentNullException(nameof(options));
+
+            methodPath = _options.GetMethodPath(method);
         }
 
         public BlazorStoreOptions Options => _options;

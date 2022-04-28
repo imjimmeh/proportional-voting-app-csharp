@@ -1,17 +1,13 @@
 ﻿using Jim.Blazor.Store.Models.Options;
+using Jim.Blazor.Store.Models.Services;
 using Jim.Core.Extensions;
-using Jim.Core.Store.Models.Services;
 using Microsoft.JSInterop;
 
 namespace Jim.Blazor.Store.Services.Stores
 {
-    public class StoreWriter : StoreService, IStoreWriter
+    public class StoreWriter : StoreService, IBlazorStoreWriter
     {
-        private const JsStoreMethod METHOD = JsStoreMethod.Set;
-
-        private string SET_ITEM_PATH => _options.GetMethodPath(METHOD);
-
-        public StoreWriter(BlazorStoreOptions options, IJSRuntime js) : base(options, js)
+        public StoreWriter(BlazorStoreOptions options, IJSRuntime js) : base(JsStoreMethod.Set, options, js)
         {
         }
 
@@ -24,7 +20,7 @@ namespace Jim.Blazor.Store.Services.Stores
 
                 string serialised = await ConvertValue(value);
 
-                await _js.InvokeVoidAsync(SET_ITEM_PATH, key, serialised);
+                await _js.InvokeVoidAsync(methodPath, key, serialised);
 
                 return true;
             }

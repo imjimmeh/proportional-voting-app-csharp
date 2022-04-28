@@ -2,7 +2,6 @@
 using Jim.Blazor.Store.Models.Options;
 using Jim.Blazor.Store.Models.Services;
 using Jim.Blazor.Store.Services;
-using Jim.Core.Helpers.Randoms;
 using NUnit.Framework;
 using System;
 using System.Collections.Concurrent;
@@ -13,24 +12,25 @@ using System.Threading.Tasks;
 
 namespace Jim.Blazor.Store.Tests.Unit
 {
-    public class StoreWriterWatcherTests : StoreServicesTestsBase
+    public class StoreWriterWatcherTests : BlazorStoreServicesTestsBase
     {
         private SpinLock _lock = new SpinLock();
 
         private const int TIME_TO_WAIT_PER_WRITE_IN_MS = 25;
         private const int CONCURRNECY_TEST_AMOUNT = 100;
-        private IStoreWriterWatcher? _watcher;
+        private IBlazorStoreWriterWatcher? _watcher;
 
         private ConcurrentBag<BlazorStoreEntryChangedEventArgs>? _returnedValues;
 
-        public IStoreWriterWatcher Watcher => _watcher ?? throw new ArgumentNullException(nameof(_watcher));
+        public StoreWriterWatcherTests() : base(new BlazorStoreOptions(StoreType.Local))
+        {
+        }
+
+        public IBlazorStoreWriterWatcher Watcher => _watcher ?? throw new ArgumentNullException(nameof(_watcher));
 
         [SetUp]
         public void Setup()
         {
-            if(Writer is not IBlazorStoreWriter writer)
-                throw new ArgumentNullException($"{nameof(Writer)} is not expected type of {typeof(IBlazorStoreWriter)}");
-
             _watcher = new StoreWriterWatcher(Options, JS);
             SetWriter(Watcher);
 

@@ -9,8 +9,9 @@ namespace Jim.Blazor.Store.Models.Events
         {
         }
 
-        public BlazorStoreEventArgs(StoreType storeType, JsStoreMethod method)
+        public BlazorStoreEventArgs(string key, StoreType storeType, JsStoreMethod method)
         {
+            Key = key;
             StoreType = storeType;
             Method = method;
         }
@@ -18,5 +19,7 @@ namespace Jim.Blazor.Store.Models.Events
         public StoreType StoreType { get; init; }
 
         public JsStoreMethod Method { get; init; }
+
+        public string Key { get; init; }
     }
 }

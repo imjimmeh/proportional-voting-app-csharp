@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jim.Core.Store.Models.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ namespace Jim.Core.Store.Models.Services
     /// <summary>
     /// Service that reads items from a store
     /// </summary>
-    public interface IStoreReader
+    public interface IStoreReader<TOptions> : IStoreService<TOptions>
+        where TOptions : StoreOptions
     {
         /// <summary>
         /// Get the object matching the given key

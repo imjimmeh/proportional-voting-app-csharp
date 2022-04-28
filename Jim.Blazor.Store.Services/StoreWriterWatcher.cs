@@ -1,11 +1,12 @@
 ﻿using Jim.Blazor.Store.Models.Events;
 using Jim.Blazor.Store.Models.Options;
+using Jim.Blazor.Store.Models.Services;
 using Jim.Blazor.Store.Services.Stores;
 using Microsoft.JSInterop;
 
 namespace Jim.Blazor.Store.Services
 {
-    public class StoreWriterWatcher : StoreWriter, IStoreWriterWatcher
+    public class StoreWriterWatcher : StoreWriter, IBlazorStoreWriterWatcher
     {
         public StoreWriterWatcher(BlazorStoreOptions options, IJSRuntime js) : base(options, js)
         {

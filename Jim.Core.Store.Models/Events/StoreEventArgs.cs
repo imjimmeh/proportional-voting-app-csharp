@@ -8,5 +8,6 @@ namespace Jim.Core.Store.Models.Events
 {
     public interface IStoreEventArgs
     {
+        string Key { get; }
     }
 }

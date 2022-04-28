@@ -15,8 +15,12 @@ using System.Threading.Tasks;
 
 namespace Jim.Blazor.Store.Tests.Unit
 {
-    public class StoreServicesTests : StoreServicesTestsBase
+    public class BlazorStoreServicesTests : BlazorStoreServicesTestsBase
     {
+        public BlazorStoreServicesTests() : base(new BlazorStoreOptions(StoreType.Local))
+        {
+        }
+
         [Test, Order(1)]
         public async Task Writer_Should_WriteObject()
         {
