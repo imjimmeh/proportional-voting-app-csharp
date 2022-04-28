@@ -1,44 +1,69 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Jim.Blazor.Store.Tests.Unit.Mocks
 {
     public class StoreMocker : IStoreMocker
     {
-        private Dictionary<string, string> _stores;
+        private bool _lockToken;
+        private ConcurrentDictionary<string, string?> _stores;
+        private SpinLock _lock = new SpinLock();
 
-        public StoreMocker(int capacity = 20)
+        public StoreMocker()
         {
-            _stores = new Dictionary<string, string>(capacity);
+            _stores = new ConcurrentDictionary<string, string?>();
         }
 
         public Task<bool> SetItem(string key, string? value)
         {
-            bool keyExists = _stores.ContainsKey(key);
-
-            if (keyExists)
-            {
-                AddOrUpdate(key, value);
-            }
-            else
-            {
-                AddIfNotNull(key, value);
-            }
+            AddOrUpdate(key, value);
             return Task.FromResult(true);
         }
 
-        private void AddIfNotNull(string key, string? value)
+        private void LockThenDo(Action action)
         {
-            if (!string.IsNullOrEmpty(value))
-                _stores.Add(key, value);
+            _lockToken = false;
+            try
+            {
+                _lock.Enter(ref _lockToken);
+                action();
+            }
+            finally
+            {
+                _lock.Exit();
+            }
+        }
+
+        private void LockThenGet<T>(Func<T> func)
+        {
+            _lockToken = false;
+            try
+            {
+                _lock.Enter(ref _lockToken);
+                func();
+            }
+            finally
+            {
+                _lock.Exit();
+            }
         }
 
         private void AddOrUpdate(string key, string? value)
         {
-            if (string.IsNullOrEmpty(value))
-                _stores.Remove(key);
-            else
-                _stores[key] = value;
+            LockThenDo(() =>
+            {
+                if (_stores.TryGetValue(key, out string? foundValue))
+                {
+                    _stores.TryUpdate(key, value, foundValue);
+                }
+                else
+                {
+                    _stores.TryAdd(key, value);
+                }
+            });
         }
 
         public async Task<string?> GetItem(string key)

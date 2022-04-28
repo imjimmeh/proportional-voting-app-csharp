@@ -14,13 +14,13 @@ namespace Jim.Blazor.Store.Models.Tests
 
         public TestStoreModel(string testString, int testInt, bool testBool, int? testNullableInt)
         {
-            TestString = testString ?? throw new ArgumentNullException(nameof(testString));
+            TestString = testString;
             TestInt = testInt;
             TestBool = testBool;
             TestNullableInt = testNullableInt;
         }
 
-        public string TestString { get; init; }
+        public string? TestString { get; init; }
 
         public int TestInt { get; init; }
 
