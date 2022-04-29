@@ -13,11 +13,11 @@ namespace Jim.Core.Authentication.Tokens.Service
         {
         }
 
-        public string GenerateTokenForUser(IDatabaseUser user)
+        public string GenerateTokenForUser(IUserWithClaims user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var userClaims = ClaimsService.ConvertUserClaims(user);
+            var userClaims = ClaimsHelpers.ConvertUserClaims(user);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

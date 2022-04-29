@@ -4,7 +4,7 @@ using Jim.Core.Authentication.Models.Services;
 
 namespace Jim.Core.Authentication.Service
 {
-    public class UserManagerService<TUser> : IUserManagerService where TUser : class, IDatabaseUser, new()
+    public class UserManagerService<TUser> : IUserManagerService where TUser : class, IUserWithClaims, new()
     {
         private IUserStore<TUser> _usersStore;
 

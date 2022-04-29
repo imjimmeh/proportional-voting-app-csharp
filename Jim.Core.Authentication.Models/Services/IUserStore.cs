@@ -3,7 +3,7 @@
 namespace Jim.Core.Authentication.Models.Services
 {
     public interface IUserStore<TUser>
-        where TUser : class, IDatabaseUser
+        where TUser : class, IUserWithClaims
     {
         Task<int> AddUserAsync(TUser user);
 

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Jim.Core.Authentication.Models.Database
 {
     [Table("Users")]
-    public class User : IDatabaseUser
+    public class User : IUserWithClaims
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

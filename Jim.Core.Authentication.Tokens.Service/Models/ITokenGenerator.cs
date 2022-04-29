@@ -4,6 +4,6 @@ namespace Jim.Core.Authentication.Tokens.Service.Models
 {
     public interface ITokenGenerator
     {
-        string GenerateTokenForUser(IDatabaseUser user);
+        string GenerateTokenForUser(IUserWithClaims user);
     }
 }

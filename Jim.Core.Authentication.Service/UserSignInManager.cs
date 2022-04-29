@@ -1,10 +1,12 @@
 ﻿using Jim.Core.Authentication.Models.Interfaces;
+using Jim.Core.Authentication.Models.Services;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using System.Security.Principal;
 
 namespace Jim.Core.Authentication.Service
 {
-    public class UserSignInManager<TUser> : IUserSignInManager<TUser> where TUser : class, IDatabaseUser
+    public class UserSignInManager<TUser> : IUserSignInManager<TUser> where TUser : class, IUserWithClaims
     {
         private IHttpContextAccessor _contextAccessor;
 
@@ -15,18 +17,25 @@ namespace Jim.Core.Authentication.Service
 
         public HttpContext Context => _contextAccessor.HttpContext;
 
-        public async Task SignInAsync(TUser user, string authenticationType)
+        public ClaimsPrincipal? User => Context.User;
+
+        public virtual async Task SignInAsync(TUser user, string authenticationType)
+        {
+            SignIn(user, authenticationType);
+        }
+
+        public virtual void SignIn(TUser user, string authenticationType)
         {
             var context = Context;
 
-            var userIsAuthenticated = context.User?.Identity.IsAuthenticated ?? false;
+            var userIsAuthenticated = context.User?.Identity?.IsAuthenticated ?? false;
 
             if (userIsAuthenticated)
                 throw new Exception($"User is already authenticated as {context.User!.Identity?.Name}");
 
             var getUserClaims = user.Claims.Select(c => new Claim(c.ClaimTypeValue, c.Value));
 
-            var userClaims = ClaimsService.ConvertUserClaims(user);
+            var userClaims = ClaimsHelpers.ConvertUserClaims(user);
 
             var newIdentity = new ClaimsIdentity(userClaims, authenticationType);
 
@@ -35,7 +44,7 @@ namespace Jim.Core.Authentication.Service
             context.User.AddIdentity(newIdentity);
         }
 
-        public (bool isAuthenticated, string? userName) TryGetUserUsername()
+        public virtual (bool isAuthenticated, string? userName) TryGetUserUsername()
         {
             var userName = _contextAccessor.HttpContext.User?.Identity?.Name;
 

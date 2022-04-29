@@ -1,20 +1,29 @@
-﻿using Jim.Core.Authentication.Models.Database;
-using Jim.Core.Authentication.Models.Interfaces;
-using System.Security.Claims;
+﻿using Jim.Core.Authentication.Models.Interfaces;
+using Jim.Core.Authentication.Models.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace Jim.Core.Authentication.Service
 {
-    public class ClaimsService
+    public class ClaimsService<TUser> : IClaimsService
+        where TUser : class, IUserWithClaims
     {
-        public static IEnumerable<Claim> ConvertUserClaims(IDatabaseUser user)
+        private IHttpContextAccessor _httpContextAccessor;
+        private IUserSignInManager<TUser> _signInManager;
+        public ClaimsService(IHttpContextAccessor httpContextAccessor, IUserSignInManager<TUser> signInManager)
         {
-            yield return new Claim(ClaimTypes.Name, user.Username);
-
-            foreach (var claim in user.Claims)
-                yield return ConvertUserClaim(claim);
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
         }
 
-        private static Claim ConvertUserClaim(IClaim claim)
-            => new Claim(claim.ClaimTypeValue, claim.Value);
+        public HttpContext Context => _httpContextAccessor.HttpContext;
+
+        public IEnumerable<string>? GetUserClaimsForType(string type)
+        {
+            if (_signInManager.User == null)
+                throw new UnauthorizedAccessException("User not authenticated");
+
+            return _signInManager.User.Claims.Where(claim => claim.Type == type)
+                                             .Select(claim => claim.Value);
+        }
     }
 }
