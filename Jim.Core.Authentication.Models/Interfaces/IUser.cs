@@ -6,11 +6,10 @@ namespace Jim.Core.Authentication.Models.Interfaces
     {
         public string Username { get; set; }
         public string Password { get; set; }
-
-        public IEnumerable<IClaim> Claims { get; }
     }
 
     public interface IDatabaseUser : IUser, IDatabaseEntity
     {
+        public IEnumerable<IClaim> Claims { get; }
     }
 }

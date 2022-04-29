@@ -15,5 +15,10 @@ namespace Jim.Core.Authentication.Models.Database
         public string Username { get; set; } = null!;
 
         public string Password { get; set; } = null!;
+
+        public IList<UserClaim> UserClaims { get; set; } = new List<UserClaim>();
+
+        [NotMapped]
+        public IEnumerable<IClaim> Claims => UserClaims.Select(userClaim => userClaim.Claim);
     }
 }

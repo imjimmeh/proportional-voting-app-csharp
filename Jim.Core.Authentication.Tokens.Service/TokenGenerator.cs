@@ -12,7 +12,7 @@ namespace Jim.Core.Authentication.Tokens.Service
         {
         }
 
-        public string GenerateTokenForUser(IUser user)
+        public string GenerateTokenForUser(IDatabaseUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -22,8 +22,8 @@ namespace Jim.Core.Authentication.Tokens.Service
             {
                 Subject = new ClaimsIdentity(userClaims),
                 Expires = DateTime.UtcNow.AddDays(7),
-                Issuer = _options.Issuer,
-                Audience = _options.Audience,
+                Issuer = Options.Issuer,
+                Audience = Options.Audience,
                 SigningCredentials = null//new SigningCredentials();
             };
 

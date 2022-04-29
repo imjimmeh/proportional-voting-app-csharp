@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Jim.Core.Authentication.Models.Claims
+namespace Jim.Core.Authentication.Models.Database
 {
     [Table("Claims")]
     public class JimClaim : IClaim

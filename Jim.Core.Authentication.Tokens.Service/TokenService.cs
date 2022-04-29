@@ -5,7 +5,7 @@ namespace Jim.Core.Authentication.Tokens.Service
 {
     public class TokenService
     {
-        private ITokenGeneratorOptions _options;
+        private readonly ITokenGeneratorOptions _options;
         private JwtSecurityTokenHandler? _jwtSecurityTokenHandler;
 
         public TokenService(ITokenGeneratorOptions options)
@@ -13,6 +13,7 @@ namespace Jim.Core.Authentication.Tokens.Service
             _options = options;
         }
 
+        protected ITokenGeneratorOptions Options => _options;
         protected JwtSecurityTokenHandler JwtSecurityTokenHandler => _jwtSecurityTokenHandler ??= new JwtSecurityTokenHandler();
     }
 }
