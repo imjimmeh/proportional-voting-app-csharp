@@ -20,13 +20,13 @@ namespace Jim.Core.Authentication.Models.DTOs
         [Required]
         [MinLength(5)]
         [StringLength(20)]
-        public string Username { get; init; } = null!;
+        public string Username { get; set; } = null!;
 
         [Required]
         [MinLength(6)]
         [StringLength(100)]
-        public string Password { get; init; } = null!;
+        public string Password { get; set; } = null!;
 
-        public bool IsValidRequest => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
+        public bool IsValidRequest => !string.IsNullOrEmpty(Username);
     }
 }

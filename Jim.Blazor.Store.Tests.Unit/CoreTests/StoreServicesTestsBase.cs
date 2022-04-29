@@ -8,7 +8,7 @@ using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
-namespace Jim.Blazor.Store.Tests.Unit
+namespace Jim.Blazor.Store.Tests.Unit.CoreTests
 {
     public abstract class StoreServicesTestsBase<TOptions>
         where TOptions : StoreOptions

@@ -2,7 +2,7 @@
 using Jim.Blazor.Store.Services.Stores;
 using Jim.Core.Store.Models.Services;
 
-namespace Jim.Blazor.Store.Tests.Unit
+namespace Jim.Blazor.Store.Tests.Unit.CoreTests
 {
     public class BlazorStoreServicesTestsBase : StoreServicesTestsBase<BlazorStoreOptions>
     {

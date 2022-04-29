@@ -1,14 +1,8 @@
-using Jim.Blazor.Store.Models;
 using Jim.Blazor.Store.Models.Options;
 using Jim.Blazor.Store.Models.Services;
 using Jim.Blazor.Store.Services.Stores;
-using Jim.Core.Store.Models.Services;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProportionalVotingApp.DatabaseService;
-using ProportionalVotingApp.Models.DTOs;
 using ProportionalVotingApp.Models.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddDbContext<IVotingRepository, VotingRepository>(options => options.UseSqlServer("Data Source=192.168.1.161;Initial Catalog=VotingApp;Persist Security Info=True;User ID=SA;Password=r1pz33z!l0l"));
+builder.Services.AddDbContext<IVotingRepository, VotingRepository>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:SqlServer"]));
 
 builder.Services.AddSingleton(new BlazorStoreOptions(StoreType.Local));
 builder.Services.AddScoped<IBlazorStoreReader, StoreReader>();

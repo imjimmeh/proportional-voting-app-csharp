@@ -4,11 +4,8 @@ using Jim.Core.Authentication.Models.Services;
 
 namespace Jim.Core.Authentication.Service
 {
-    public class UserManagerService<TUser>
-        where TUser : class, IDatabaseUser, new()
+    public class UserManagerService<TUser> : IUserManagerService where TUser : class, IDatabaseUser, new()
     {
-        private const string INVALID_USER_ERROR = "User is not valid";
-
         private IUserStore<TUser> _usersStore;
 
         public UserManagerService(IUserStore<TUser> usersStore)

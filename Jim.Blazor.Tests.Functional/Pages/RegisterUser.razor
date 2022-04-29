@@ -1,0 +1,38 @@
+﻿@page "/register"
+@using Jim.Core.Authentication.Models.DTOs
+@using Jim.Core.Authentication.Models.Services
+
+@inject IUserManagerService userService
+<h3>RegisterUser</h3>
+
+<div>
+    <div>
+        @{
+            <p>@errorMessages</p>
+        }
+    </div>
+    <div class="form-group">
+        <label for="username">Username: </label>
+        <input id="username" @bind-value="@createUserRequest.Username" placeholder="Username" />
+    </div>
+
+    <button class="btn-primary" @onclick="@RegisterNewUser">Create User</button>
+</div>
+
+@code {
+    public CreateUserDTO createUserRequest = new CreateUserDTO();
+
+    string errorMessages = "";
+    async Task RegisterNewUser()
+    {
+        if(!createUserRequest.IsValidRequest)
+        {
+            errorMessages = "Invalid user request - please provide username";
+            return;
+        }
+
+        var result = await userService.CreateNewUser(createUserRequest);
+
+        errorMessages = result ? "" : "Could not create user";
+    }
+}

@@ -2,6 +2,7 @@
 using Jim.Blazor.Store.Models.Tests;
 using Jim.Blazor.Store.Services;
 using Jim.Blazor.Store.Services.Stores;
+using Jim.Blazor.Store.Tests.Unit.CoreTests;
 using Jim.Blazor.Store.Tests.Unit.Mocks;
 using Jim.Core.Helpers.Randoms;
 using Jim.Core.Store.Models.Services;

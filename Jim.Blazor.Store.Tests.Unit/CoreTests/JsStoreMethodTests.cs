@@ -3,7 +3,7 @@ using Jim.Core.Tests.Base;
 using NUnit.Framework;
 using System;
 
-namespace Jim.Blazor.Store.Tests.Unit
+namespace Jim.Blazor.Store.Tests.Unit.CoreTests
 {
     public class JsStoreMethodTests : TestsBase
     {
@@ -14,7 +14,7 @@ namespace Jim.Blazor.Store.Tests.Unit
             {
                 ObjectsAreEqualsAndSecondIsNotNull(JsStoreMethod.Get.ToMethodName(), JsStoreMethods.GET_METHOD);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Fail(ex.Message);
             }

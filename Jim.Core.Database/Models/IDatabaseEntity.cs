@@ -1,4 +1,4 @@
-﻿namespace Jim.Core.Database
+﻿namespace Jim.Core.Database.Models
 {
     public interface IDatabaseEntity
     {

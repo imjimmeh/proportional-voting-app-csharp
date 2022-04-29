@@ -4,11 +4,19 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b3cd3e16-c179-4367-87a2-23cb399592f6</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Jim.Blazor.Store.Models\Jim.Blazor.Store.Models.csproj" />
     <ProjectReference Include="..\Jim.Blazor.Store.Services\Jim.Blazor.Store.Services.csproj" />
+    <ProjectReference Include="..\Jim.Core.Authentication.Database.Service\Jim.Core.Authentication.Database.Service.csproj" />
+    <ProjectReference Include="..\Jim.Core.Authentication.Models\Jim.Core.Authentication.Models.csproj" />
+    <ProjectReference Include="..\Jim.Core.Authentication.Service\Jim.Core.Authentication.Service.csproj" />
     <ProjectReference Include="..\Jim.Core.Store.Models\Jim.Core.Store.Models.csproj" />
   </ItemGroup>
 

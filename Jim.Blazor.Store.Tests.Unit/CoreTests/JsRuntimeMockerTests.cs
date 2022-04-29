@@ -6,7 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
-namespace Jim.Blazor.Store.Tests.Unit
+namespace Jim.Blazor.Store.Tests.Unit.CoreTests
 {
     public class JsRuntimeMockerTests
     {
@@ -51,7 +51,7 @@ namespace Jim.Blazor.Store.Tests.Unit
 
                 Assert.True(string.IsNullOrEmpty(get));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Assert.Pass();
             }

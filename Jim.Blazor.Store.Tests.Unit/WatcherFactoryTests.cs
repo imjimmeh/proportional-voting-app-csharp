@@ -3,6 +3,7 @@ using Jim.Blazor.Store.Models.Options;
 using Jim.Blazor.Store.Models.Services;
 using Jim.Blazor.Store.Models.Tests;
 using Jim.Blazor.Store.Services;
+using Jim.Blazor.Store.Tests.Unit.CoreTests;
 using Jim.Core.Store.Models.Events;
 using NUnit.Framework;
 using System;
