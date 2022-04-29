@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jim.Core.Authentication.Models\Jim.Core.Authentication.Models.csproj" />
+    <ProjectReference Include="..\Jim.Core.Authentication.Service\Jim.Core.Authentication.Service.csproj" />
   </ItemGroup>
 
 </Project>

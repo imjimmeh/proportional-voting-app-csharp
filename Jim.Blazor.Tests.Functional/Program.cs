@@ -14,7 +14,9 @@ var config = builder.Configuration;
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<IUserSignInManager<User>, UserSignInManager<User>>();
 builder.Services.AddScoped<IBlazorStoreReader, StoreReader>();
 builder.Services.AddScoped<IBlazorStoreWriter, StoreWriter>();
 

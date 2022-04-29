@@ -21,6 +21,10 @@ namespace Jim.Core.Authentication.Database.Service
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(SCHEMA);
+            modelBuilder.Entity<UserClaim>(entity =>
+            {
+                entity.HasKey(userClaim => new { userClaim.UserId, userClaim.ClaimId });
+            });
         }
 
         public async Task<int> AddUserAsync(User user)

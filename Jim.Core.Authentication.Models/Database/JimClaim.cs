@@ -14,14 +14,15 @@ namespace Jim.Core.Authentication.Models.Database
 
         [Required]
         [MinLength(3)]
+        [StringLength(50)]
         public string Value { get; set; } = "";
 
         [Range(1, long.MaxValue)]
-        public long JimClaimTypeId { get; set; }
+        public long ClaimTypeId { get; set; }
 
-        public JimClaimType JimClaimType { get; set; } = null!;
+        public JimClaimType ClaimType { get; set; } = null!;
 
         [NotMapped]
-        public string ClaimType => JimClaimType.Type.ToString();
+        public string ClaimTypeValue => ClaimType.Type.ToString();
     }
 }

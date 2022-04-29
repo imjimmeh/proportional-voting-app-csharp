@@ -1,0 +1,31 @@
+﻿@page "/loggedin"
+@using Jim.Core.Authentication.Models.Database
+@using Jim.Core.Authentication.Service
+
+@inject IUserSignInManager<User> signInManager
+@inject NavigationManager navigation
+
+@if(username == null)
+{
+    <p>Getting username..</p>
+}
+else
+{
+    <p>Hello @username!</p>
+}
+
+@code {
+    public string? username;
+
+    protected override Task OnInitializedAsync()
+    {
+        (bool isAuthenticated, string? username) = signInManager.TryGetUserUsername();
+
+        if (!isAuthenticated)
+            navigation.NavigateTo("/");
+        else
+            this.username = username ?? "Could not find username, but you did authenticate?wtf";
+
+        return base.OnInitializedAsync();
+    }
+}

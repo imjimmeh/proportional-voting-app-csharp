@@ -1,4 +1,5 @@
 ﻿using Jim.Core.Authentication.Models.Interfaces;
+using Jim.Core.Authentication.Service;
 using Jim.Core.Authentication.Tokens.Service.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,8 +17,8 @@ namespace Jim.Core.Authentication.Tokens.Service
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var userClaims = user.Claims.Select(claim => new Claim(claim.ClaimType, claim.Value)).ToList();
-            userClaims.Insert(0, new Claim(ClaimTypes.NameIdentifier, user.Username.ToString()));
+            var userClaims = ClaimsService.ConvertUserClaims(user);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(userClaims),

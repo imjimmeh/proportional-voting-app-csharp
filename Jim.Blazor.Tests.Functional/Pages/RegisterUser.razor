@@ -1,8 +1,13 @@
 ﻿@page "/register"
 @using Jim.Core.Authentication.Models.DTOs
+@using Jim.Core.Authentication.Models.Database
 @using Jim.Core.Authentication.Models.Services
+@using Jim.Core.Authentication.Service
+@using Microsoft.AspNetCore.Identity
 
 @inject IUserManagerService userService
+@inject IUserSignInManager<User> signInManager
+@inject NavigationManager navigation
 <h3>RegisterUser</h3>
 
 <div>
@@ -33,6 +38,16 @@
 
         var result = await userService.CreateNewUser(createUserRequest);
 
+        if(result)
+        {
+            await signInManager.SignInAsync(new User
+                {
+                    Username = createUserRequest.Username
+                }, "Token");
+
+
+                navigation.NavigateTo("/loggedin");
+        }
         errorMessages = result ? "" : "Could not create user";
     }
 }
