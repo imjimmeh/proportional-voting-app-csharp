@@ -26,6 +26,7 @@ namespace Jim.Core.Encryption.Service
                 if (config.DecodeString(expected.HashedString, out SecureArray<byte>? hashB) && hashB != null)
                 {
                     var argon2ToVerify = new Argon2(config);
+
                     using (var hashToVerify = argon2ToVerify.Hash())
                     {
                         var equals = Argon2.FixedTimeEquals(hashB, hashToVerify);

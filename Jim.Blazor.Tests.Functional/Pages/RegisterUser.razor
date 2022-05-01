@@ -37,7 +37,7 @@
 
         var result = await userService.CreateNewUser(createUserRequest);
 
-        if(result)
+        if(result.HasValue)
         {
             await signInManager.SignInAsync(new User
                 {
@@ -47,6 +47,7 @@
 
                 navigation.NavigateTo("/loggedin");
         }
-        errorMessages = result ? "" : "Could not create user";
+
+        errorMessages = result.HasValue ? "" : "Could not create user";
     }
 }
