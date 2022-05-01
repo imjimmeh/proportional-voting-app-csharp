@@ -29,7 +29,7 @@ namespace Jim.Core.Authentication.Service
             => new TUser
             {
                 Username = newUser.Username,
-                Password = newUser.Password
+                HashedPassword = newUser.HashedPassword
             };
 
         private async Task<(bool isValid, string? errorMessage)> IsValidRequest(CreateUserDTO newUser)
