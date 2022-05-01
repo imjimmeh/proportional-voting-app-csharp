@@ -25,6 +25,7 @@ namespace Jim.Core.Helpers.Randoms
             return new string(letters);
         }
 
+
         public static string GenerateString(int length) => GenerateString(RNG.Random, length);
 
     }

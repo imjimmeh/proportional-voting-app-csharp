@@ -20,5 +20,6 @@ namespace Jim.Core.Encryption.Service
 
         protected internal abstract HashedStringWithSalt ConcreteHashString(string toHash);
 
+        public abstract bool VerifyHashedString(string incoming, HashedStringWithSalt expected);
     }
 }

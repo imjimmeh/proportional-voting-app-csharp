@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Encryption.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Encryption.Models", "Jim.Core.Encryption.Models\Jim.Core.Encryption.Models.csproj", "{0D2F5129-0850-4BDA-9509-360338DD5DFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Encryption.Tests", "Jim.Core.Encryption.Tests\Jim.Core.Encryption.Tests.csproj", "{100FD946-BE34-4AC9-9642-FEC6850CCF79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,10 @@ Global
 		{0D2F5129-0850-4BDA-9509-360338DD5DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D2F5129-0850-4BDA-9509-360338DD5DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D2F5129-0850-4BDA-9509-360338DD5DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{100FD946-BE34-4AC9-9642-FEC6850CCF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{100FD946-BE34-4AC9-9642-FEC6850CCF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{100FD946-BE34-4AC9-9642-FEC6850CCF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{100FD946-BE34-4AC9-9642-FEC6850CCF79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +186,7 @@ Global
 		{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E} = {A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}
 		{DC0728AE-2D04-4CB6-BE0E-B1771C13CD7A} = {0AB57D05-BDE4-4A9F-9EE3-6F70AB412308}
 		{0D2F5129-0850-4BDA-9509-360338DD5DFD} = {0AB57D05-BDE4-4A9F-9EE3-6F70AB412308}
+		{100FD946-BE34-4AC9-9642-FEC6850CCF79} = {0AB57D05-BDE4-4A9F-9EE3-6F70AB412308}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C88AA86A-CE8F-4C4A-A304-8746A19AB1A6}

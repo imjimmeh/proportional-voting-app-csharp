@@ -1,12 +1,8 @@
 ﻿using Isopoh.Cryptography.Argon2;
 using Isopoh.Cryptography.SecureArray;
 using Jim.Core.Encryption.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Jim.Core.Encryption.Service
 {
@@ -19,6 +15,35 @@ namespace Jim.Core.Encryption.Service
         public Argon2EncryptionService(Argon2EncryptionOptions options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
+        }
+
+        public override bool VerifyHashedString(string toVerify, HashedStringWithSalt expected)
+        {
+            try
+            {
+                var config = _options.ToConfig(toVerify, Encoding.ASCII.GetBytes(expected.Salt));
+
+                if (config.DecodeString(expected.HashedString, out SecureArray<byte>? hashB) && hashB != null)
+                {
+                    var argon2ToVerify = new Argon2(config);
+                    using (var hashToVerify = argon2ToVerify.Hash())
+                    {
+                        var equals = Argon2.FixedTimeEquals(hashB, hashToVerify);
+
+                        return equals;
+                    }
+                }
+
+                return false;
+            }
+            catch(ArgumentException ex)
+            {
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error verifying hash", ex);
+            }
         }
 
         protected internal override HashedStringWithSalt ConcreteHashString(string toHash)
@@ -34,7 +59,7 @@ namespace Jim.Core.Encryption.Service
                     {
                         var hashed = config.EncodeString(hashA.Buffer);
 
-                        return new HashedStringWithSalt(hashed, Encoding.UTF8.GetString(salt));
+                        return new HashedStringWithSalt(hashed, Encoding.ASCII.GetString(salt));
                     }
                 }
             }
