@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DTOs\CreateUserResponse.cs~RF194eccb1.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Jim.Core.Database\Jim.Core.Database.csproj" />
+    <ProjectReference Include="..\Jim.Core.Shared.Models\Jim.Core.Shared.Models.csproj" />
   </ItemGroup>
 
 </Project>

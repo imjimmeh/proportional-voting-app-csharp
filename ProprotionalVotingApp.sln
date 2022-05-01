@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.API
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.Tokens.Service", "Jim.Core.Authentication.Tokens.Service\Jim.Core.Authentication.Tokens.Service.csproj", "{6DC6335D-E1FB-4574-BC0B-D2CB3249C347}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Shared.Models", "Jim.Core.Shared.Models\Jim.Core.Shared.Models.csproj", "{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{6DC6335D-E1FB-4574-BC0B-D2CB3249C347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DC6335D-E1FB-4574-BC0B-D2CB3249C347}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DC6335D-E1FB-4574-BC0B-D2CB3249C347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{A033E156-D9E2-43A2-9090-AF998C2F2914} = {D9C67C64-D4D0-4371-9F81-C0A0F6C3C0FE}
 		{575733C8-14E6-4AB9-9B19-FFB16367DCE1} = {D9C67C64-D4D0-4371-9F81-C0A0F6C3C0FE}
 		{6DC6335D-E1FB-4574-BC0B-D2CB3249C347} = {D9C67C64-D4D0-4371-9F81-C0A0F6C3C0FE}
+		{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E} = {A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C88AA86A-CE8F-4C4A-A304-8746A19AB1A6}

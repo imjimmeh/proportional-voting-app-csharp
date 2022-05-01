@@ -13,23 +13,28 @@ namespace Jim.Core.Authentication.Service
             _usersStore = usersStore ?? throw new ArgumentNullException(nameof(usersStore));
         }
 
-        public async Task<bool> CreateNewUser(CreateUserDTO newUser)
+        public async Task<long?> CreateNewUser(CreateUserDTO newUser)
         {
             var validation = await IsValidRequest(newUser);
 
             if (!validation.isValid)
-                return false;
+                throw new InvalidDataException($"User request is not valid - {validation.errorMessage}");
 
-            var countAffected = await _usersStore.AddUserAsync(ProjectUser(newUser));
+            var userDbEntity = ProjectUser(newUser);
 
-            return countAffected > 0;
+            var countAffected = await _usersStore.AddUserAsync(userDbEntity);
+
+            if (countAffected <= 0)
+                throw new Exception($"No user was created");
+
+            return userDbEntity.Id;
         }
 
         private static TUser ProjectUser(CreateUserDTO newUser)
             => new TUser
             {
                 Username = newUser.Username,
-                HashedPassword = newUser.HashedPassword
+               // HashedPassword = newUser.Password
             };
 
         private async Task<(bool isValid, string? errorMessage)> IsValidRequest(CreateUserDTO newUser)

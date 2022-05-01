@@ -14,7 +14,7 @@ namespace Jim.Core.Authentication.Models.DTOs
             username = username.Trim();
             password = password.Trim();
             Username = !string.IsNullOrEmpty(username) ? username : throw new ArgumentNullException(nameof(username));
-            HashedPassword = !string.IsNullOrEmpty(password) ? password : throw new ArgumentNullException(nameof(password));
+            Password = !string.IsNullOrEmpty(password) ? password : throw new ArgumentNullException(nameof(password));
         }
 
         [Required]
@@ -25,8 +25,8 @@ namespace Jim.Core.Authentication.Models.DTOs
         [Required]
         [MinLength(6)]
         [StringLength(100)]
-        public string HashedPassword { get; set; } = null!;
+        public string Password { get; set; } = null!;
 
-        public bool IsValidRequest => !string.IsNullOrEmpty(Username);
+        public bool IsValidRequest => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
     }
 }

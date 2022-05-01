@@ -11,7 +11,7 @@ namespace Jim.Core.Authentication.Models.Services
         /// Create new user
         /// </summary>
         /// <param name="newUser">User to create</param>
-        /// <returns>bool if success - otherwise exception</returns>
-        Task<bool> CreateNewUser(CreateUserDTO newUser);
+        /// <returns>Created UserId</returns>
+        Task<long?> CreateNewUser(CreateUserDTO newUser);
     }
 }
