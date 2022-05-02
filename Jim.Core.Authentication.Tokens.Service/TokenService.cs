@@ -1,9 +1,8 @@
-﻿using Jim.Core.Authentication.Models.Interfaces;
-using Jim.Core.Authentication.Service;
+﻿using Jim.Core.Authentication.Models.DTOs;
+using Jim.Core.Authentication.Models.Interfaces;
+using Jim.Core.Authentication.Models.Services;
 using Jim.Core.Authentication.Tokens.Service.Models;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace Jim.Core.Authentication.Tokens.Service
 {
@@ -20,7 +19,7 @@ namespace Jim.Core.Authentication.Tokens.Service
         protected ITokenGeneratorOptions Options => _options;
         protected JwtSecurityTokenHandler JwtSecurityTokenHandler => _jwtSecurityTokenHandler ??= new JwtSecurityTokenHandler();
 
-        public async Task<string> GenerateToken(IUserWithClaims user)
+        public async Task<TokenResult> GenerateToken(IUserWithClaims user)
         {
             try
             {
@@ -31,12 +30,27 @@ namespace Jim.Core.Authentication.Tokens.Service
 
                 var token = JwtSecurityTokenHandler.CreateToken(descriptor);
 
-                return JwtSecurityTokenHandler.WriteToken(token);
+                var tokenString = JwtSecurityTokenHandler.WriteToken(token);
+
+                return new TokenResult
+                {
+                    GeneratedToken = tokenString,
+                    ExpiresAt = descriptor.Expires
+                };
+            }
+            catch(ArgumentNullException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
                 throw new Exception($"Error generating token for user {user.Username}", ex);
             }
+        }
+
+        public async Task<ValidateTokenResult> ValidateTokenResult(string token)
+        {
+            return new ValidateTokenResult(true);
         }
     }
 }

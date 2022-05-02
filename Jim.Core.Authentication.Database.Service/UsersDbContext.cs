@@ -76,7 +76,7 @@ namespace Jim.Core.Authentication.Database.Service
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error finding user {username}", ex.Message);
+                throw new Exception($"Error finding user {username}", ex);
             }
         }
     }

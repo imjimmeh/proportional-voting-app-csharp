@@ -3,7 +3,6 @@ using Jim.Core.Authentication.Models.Exceptions;
 using Jim.Core.Authentication.Models.Interfaces;
 using Jim.Core.Authentication.Models.Services;
 using Jim.Core.Encryption.Models;
-using Jim.Core.Encryption.Service;
 
 namespace Jim.Core.Authentication.Service
 {
@@ -39,25 +38,36 @@ namespace Jim.Core.Authentication.Service
             return userDbEntity.Id;
         }
 
-        public async Task<GetUserDTO?> LoginAsync(LoginRequest loginRequest)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
+        /// <exception cref="JimAuthenticationException">Exception thrown if the issue is related to authentication (e.g. wrong username, password)</exception>
+        /// <exception cref="Exception">Any other exception</exception>
+        public async Task<GetUserDTO?> TryLoginAsync(LoginRequest loginRequest)
         {
             try
             {
                 var existingUser = await _usersStore.GetUserByUsernameAsync(loginRequest.Username);
 
                 if (existingUser == null)
-                    throw new AuthenticationException(AuthenticationFailureReason.InvalidUsername);
+                    throw new JimAuthenticationException(AuthenticationFailureReason.InvalidUsername);
 
                 var encryptedPassword = _encryptionService.VerifyHashedString(loginRequest.Username, new HashedStringWithSalt(existingUser.HashedPassword, existingUser.PasswordSalt));
 
                 if (!encryptedPassword)
-                    throw new AuthenticationException(AuthenticationFailureReason.InvalidPassword);
+                    throw new JimAuthenticationException(AuthenticationFailureReason.InvalidPassword);
 
                 return new GetUserDTO(existingUser);
             }
-            catch(Exception ex)
+            catch(JimAuthenticationException)
             {
                 throw;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Unknown error trying to login user {loginRequest.Username}", ex);
             }
         }
 

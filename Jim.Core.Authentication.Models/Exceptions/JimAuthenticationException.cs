@@ -7,31 +7,31 @@ using System.Threading.Tasks;
 
 namespace Jim.Core.Authentication.Models.Exceptions
 {
-    public class AuthenticationException : UnauthorizedAccessException
+    public class JimAuthenticationException : UnauthorizedAccessException
     {
         public readonly AuthenticationFailureReason FailureReason;
 
-        public AuthenticationException()
+        public JimAuthenticationException()
         {
         }
 
-        public AuthenticationException(AuthenticationFailureReason failureReason) : base(failureReason.GetErrorMessageForReason())
-        {
-            FailureReason = failureReason;
-        }
-
-
-        public AuthenticationException(AuthenticationFailureReason failureReason, string? message) : base(message)
+        public JimAuthenticationException(AuthenticationFailureReason failureReason) : base(failureReason.GetErrorMessageForReason())
         {
             FailureReason = failureReason;
         }
 
-        public AuthenticationException(AuthenticationFailureReason failureReason, string? message, Exception? innerException) : base(message, innerException)
+
+        public JimAuthenticationException(AuthenticationFailureReason failureReason, string? message) : base(message)
         {
             FailureReason = failureReason;
         }
 
-        protected AuthenticationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public JimAuthenticationException(AuthenticationFailureReason failureReason, string? message, Exception? innerException) : base(message, innerException)
+        {
+            FailureReason = failureReason;
+        }
+
+        protected JimAuthenticationException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

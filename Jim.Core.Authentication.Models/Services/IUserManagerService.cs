@@ -5,7 +5,7 @@ namespace Jim.Core.Authentication.Models.Services
     /// <summary>
     /// Service to register and manage users
     /// </summary>
-    public interface IUserManagerService
+    public interface IUserManagerService : ILoginService
     {
         /// <summary>
         /// Create new user
@@ -13,6 +13,5 @@ namespace Jim.Core.Authentication.Models.Services
         /// <param name="newUser">User to create</param>
         /// <returns>Created UserId</returns>
         Task<long?> CreateNewUser(CreateUserDTO newUser);
-        Task<GetUserDTO?> LoginAsync(LoginRequest loginRequest);
     }
 }

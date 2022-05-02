@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Jim.Core.Authentication.Tokens.Service\Jim.Core.Authentication.Tokens.Service.csproj" />
     <ProjectReference Include="..\Jim.Core.Encryption.Service\Jim.Core.Encryption.Service.csproj" />
     <ProjectReference Include="..\Jim.Core.Extensions\Jim.Core.Extensions.csproj" />
+    <ProjectReference Include="..\Jim.Core.Shared.APIs\Jim.Core.Shared.APIs.csproj" />
     <ProjectReference Include="..\Jim.Core.Shared.Models\Jim.Core.Shared.Models.csproj" />
   </ItemGroup>
 

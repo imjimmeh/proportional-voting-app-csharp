@@ -37,33 +37,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stores", "Stores", "{5D8AE5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Tests.Base", "Jim.Core.Tests.Base\Jim.Core.Tests.Base.csproj", "{58376476-85F6-45C3-A9C6-F219B75FFD10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Multithreading", "Jim.Core.Multithreading\Jim.Core.Multithreading.csproj", "{9106CCC7-AA95-425E-8EF0-698A6F04137C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Multithreading", "Jim.Core.Multithreading\Jim.Core.Multithreading.csproj", "{9106CCC7-AA95-425E-8EF0-698A6F04137C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{D9C67C64-D4D0-4371-9F81-C0A0F6C3C0FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.Service", "Jim.Core.Authentication.Service\Jim.Core.Authentication.Service.csproj", "{091F3032-197E-4AB5-A569-6DAAA65CFF51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Authentication.Service", "Jim.Core.Authentication.Service\Jim.Core.Authentication.Service.csproj", "{091F3032-197E-4AB5-A569-6DAAA65CFF51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.Models", "Jim.Core.Authentication.Models\Jim.Core.Authentication.Models.csproj", "{FA24F143-EAC0-4EF3-B11E-5B0CB147D304}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Authentication.Models", "Jim.Core.Authentication.Models\Jim.Core.Authentication.Models.csproj", "{FA24F143-EAC0-4EF3-B11E-5B0CB147D304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Database", "Jim.Core.Database\Jim.Core.Database.csproj", "{5DB76E86-DEA9-4985-8554-4B2A5111705F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Database", "Jim.Core.Database\Jim.Core.Database.csproj", "{5DB76E86-DEA9-4985-8554-4B2A5111705F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.Database.Service", "Jim.Core.Authentication.Database.Service\Jim.Core.Authentication.Database.Service.csproj", "{A033E156-D9E2-43A2-9090-AF998C2F2914}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Authentication.Database.Service", "Jim.Core.Authentication.Database.Service\Jim.Core.Authentication.Database.Service.csproj", "{A033E156-D9E2-43A2-9090-AF998C2F2914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.API", "Jim.Core.Authentication.API\Jim.Core.Authentication.API.csproj", "{575733C8-14E6-4AB9-9B19-FFB16367DCE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Authentication.API", "Jim.Core.Authentication.API\Jim.Core.Authentication.API.csproj", "{575733C8-14E6-4AB9-9B19-FFB16367DCE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.Tokens.Service", "Jim.Core.Authentication.Tokens.Service\Jim.Core.Authentication.Tokens.Service.csproj", "{6DC6335D-E1FB-4574-BC0B-D2CB3249C347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Authentication.Tokens.Service", "Jim.Core.Authentication.Tokens.Service\Jim.Core.Authentication.Tokens.Service.csproj", "{6DC6335D-E1FB-4574-BC0B-D2CB3249C347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Shared.Models", "Jim.Core.Shared.Models\Jim.Core.Shared.Models.csproj", "{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Shared.Models", "Jim.Core.Shared.Models\Jim.Core.Shared.Models.csproj", "{C324F0FC-2FFE-4B1B-BA7B-53FD4D29633E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Encryption", "Encryption", "{0AB57D05-BDE4-4A9F-9EE3-6F70AB412308}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Encryption.Service", "Jim.Core.Encryption.Service\Jim.Core.Encryption.Service.csproj", "{DC0728AE-2D04-4CB6-BE0E-B1771C13CD7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Encryption.Service", "Jim.Core.Encryption.Service\Jim.Core.Encryption.Service.csproj", "{DC0728AE-2D04-4CB6-BE0E-B1771C13CD7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Encryption.Models", "Jim.Core.Encryption.Models\Jim.Core.Encryption.Models.csproj", "{0D2F5129-0850-4BDA-9509-360338DD5DFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Encryption.Models", "Jim.Core.Encryption.Models\Jim.Core.Encryption.Models.csproj", "{0D2F5129-0850-4BDA-9509-360338DD5DFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Encryption.Tests", "Jim.Core.Encryption.Tests\Jim.Core.Encryption.Tests.csproj", "{100FD946-BE34-4AC9-9642-FEC6850CCF79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Encryption.Tests", "Jim.Core.Encryption.Tests\Jim.Core.Encryption.Tests.csproj", "{100FD946-BE34-4AC9-9642-FEC6850CCF79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Shared.Tests", "Jim.Core.Shared.Tests\Jim.Core.Shared.Tests.csproj", "{5D7AC55D-2D1A-4C37-BB7C-9DB72F2D45D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Shared.Tests", "Jim.Core.Shared.Tests\Jim.Core.Shared.Tests.csproj", "{5D7AC55D-2D1A-4C37-BB7C-9DB72F2D45D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{EDBF4862-D851-4017-88CA-584CD476C102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Shared.APIs", "Jim.Core.Shared.APIs\Jim.Core.Shared.APIs.csproj", "{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,6 +171,10 @@ Global
 		{5D7AC55D-2D1A-4C37-BB7C-9DB72F2D45D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D7AC55D-2D1A-4C37-BB7C-9DB72F2D45D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D7AC55D-2D1A-4C37-BB7C-9DB72F2D45D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +202,7 @@ Global
 		{0D2F5129-0850-4BDA-9509-360338DD5DFD} = {0AB57D05-BDE4-4A9F-9EE3-6F70AB412308}
 		{100FD946-BE34-4AC9-9642-FEC6850CCF79} = {0AB57D05-BDE4-4A9F-9EE3-6F70AB412308}
 		{5D7AC55D-2D1A-4C37-BB7C-9DB72F2D45D0} = {A64F0D6A-C94E-45C7-ABBD-BBE2BE9BBE63}
+		{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362} = {EDBF4862-D851-4017-88CA-584CD476C102}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C88AA86A-CE8F-4C4A-A304-8746A19AB1A6}

@@ -1,6 +1,4 @@
-﻿using Jim.Core.Encryption.Models;
-
-namespace Jim.Core.Encryption.Service
+﻿namespace Jim.Core.Encryption.Models
 {
     public interface IEncryptionService
     {
