@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Jim.Core.Authentication.Models.Database
 {
     [Table("Users")]
-    public class User : IUserWithClaims
+    public class User : IDatabaseUser
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -23,11 +23,18 @@ namespace Jim.Core.Authentication.Models.Database
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public DateTime? LastModified { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime LastModified { get; set; }
 
         public IList<UserClaim> UserClaims { get; set; } = new List<UserClaim>();
 
         [NotMapped]
         public IEnumerable<IClaim> Claims => UserClaims.Select(userClaim => userClaim.Claim);
+
+        public void WithPassword(IHashedPasswordWithSalt passwordAndSalt)
+        {
+            HashedPassword = passwordAndSalt.HashedPassword;
+            PasswordSalt = passwordAndSalt.PasswordSalt;
+        }
     }
 }

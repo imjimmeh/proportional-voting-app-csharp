@@ -2,7 +2,6 @@
 using Jim.Core.Authentication.Models.Services;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace Jim.Core.Authentication.Service
 {
@@ -33,7 +32,7 @@ namespace Jim.Core.Authentication.Service
             if (userIsAuthenticated)
                 throw new Exception($"User is already authenticated as {context.User!.Identity?.Name}");
 
-            var getUserClaims = user.Claims.Select(c => new Claim(c.ClaimTypeValue, c.Value));
+            var getUserClaims = user.Claims.Select(c => new Claim(c.Type, c.Value));
 
             var userClaims = ClaimsHelpers.ConvertUserClaims(user);
 

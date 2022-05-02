@@ -7,11 +7,14 @@ namespace Jim.Core.Authentication.Models.Services
     {
         Task<int> AddUserAsync(TUser user);
 
-        Task<TUser?> GetUserById(long id);
+        Task<TUser?> GetUserByIdAsync(long id);
 
-        Task<bool> DeleteUserById(long id);
+        Task<bool> DeleteUserByIdAsync(long id);
 
-        Task<bool> UserWithIdExists(long id);
-        Task<bool> UsernameInUse(string username);
+        Task<bool> UserWithIdExistsAsync(long id);
+
+        Task<bool> UsernameInUseAsync(string username);
+
+        Task<TUser> GetUserByUsernameAsync(string username);
     }
 }

@@ -2,8 +2,8 @@
 {
     public interface IHashedPasswordWithSalt
     {
-        public string HashedPassword { get; set; }
+        public string HashedPassword { get; }
 
-        public string PasswordSalt { get; set; }
+        public string PasswordSalt { get; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Jim.Core.Encryption.Models
 {
-    public record HashedStringWithSalt
+    public record struct HashedStringWithSalt
     {
         public HashedStringWithSalt()
         {

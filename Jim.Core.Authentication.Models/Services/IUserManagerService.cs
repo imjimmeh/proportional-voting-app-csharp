@@ -13,5 +13,6 @@ namespace Jim.Core.Authentication.Models.Services
         /// <param name="newUser">User to create</param>
         /// <returns>Created UserId</returns>
         Task<long?> CreateNewUser(CreateUserDTO newUser);
+        Task<GetUserDTO?> LoginAsync(LoginRequest loginRequest);
     }
 }

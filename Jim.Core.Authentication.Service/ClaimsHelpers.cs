@@ -5,7 +5,7 @@ namespace Jim.Core.Authentication.Service
 {
     public static class ClaimsHelpers
     {
-        public static IEnumerable<Claim> ConvertUserClaims(IUserWithClaims user)
+        public static IEnumerable<Claim> ConvertUserClaims(this IUserWithClaims user)
         {
             yield return new Claim(ClaimTypes.Name, user.Username);
 
@@ -13,7 +13,7 @@ namespace Jim.Core.Authentication.Service
                 yield return ConvertUserClaim(claim);
         }
 
-        private static Claim ConvertUserClaim(IClaim claim)
-            => new Claim(claim.ClaimTypeValue, claim.Value);
+        private static Claim ConvertUserClaim(this IClaim claim)
+            => new Claim(claim.Type, claim.Value);
     }
 }

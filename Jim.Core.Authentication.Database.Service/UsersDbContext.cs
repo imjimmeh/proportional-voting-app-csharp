@@ -35,14 +35,14 @@ namespace Jim.Core.Authentication.Database.Service
             return amountAdded;
         }
 
-        public async Task<User?> GetUserById(long id)
+        public async Task<User?> GetUserByIdAsync(long id)
             => await _users.Where(user => user.Id == id)
                         .Select(user => user)
                         .FirstOrDefaultAsync();
 
-        public async Task<bool> DeleteUserById(long id)
+        public async Task<bool> DeleteUserByIdAsync(long id)
         {
-            var userExists = await UserWithIdExists(id);
+            var userExists = await UserWithIdExistsAsync(id);
             if (userExists)
             {
                 var fauxUser = new User { Id = id };
@@ -58,9 +58,26 @@ namespace Jim.Core.Authentication.Database.Service
             throw new KeyNotFoundException($"Unable to find user with id {id}");
         }
 
-        public Task<bool> UserWithIdExists(long id) => _users.AnyAsync(user => user.Id == id);
+        public Task<bool> UserWithIdExistsAsync(long id) => _users.AnyAsync(user => user.Id == id);
 
-        public Task<bool> UsernameInUse(string username) => _users.AnyAsync(user => user.Username == username);
+        public Task<bool> UsernameInUseAsync(string username) => _users.AnyAsync(user => user.Username == username);
 
+        public async Task<User?> GetUserByUsernameAsync(string username)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(username))
+                    return null;
+
+                var matchingUser = await _users.Where(user => user.Username == username)
+                                               .FirstOrDefaultAsync();
+
+                return matchingUser;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Error finding user {username}", ex.Message);
+            }
+        }
     }
 }

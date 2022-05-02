@@ -2,29 +2,30 @@
 using Jim.Core.Authentication.Models.Services;
 using Jim.Core.Extensions;
 using Jim.Core.Shared.Models.DTOs;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jim.Core.Authentication.API.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class UsersController : Controller
     {
-        private readonly ILogger<UsersController> _logger;
         private readonly IUserManagerService _usersService;
 
-        public UsersController(ILogger<UsersController> logger, IUserManagerService usersService)
+        public UsersController(IUserManagerService usersService)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
         }
 
-        [Authorize(Roles = "GetUsers")]
-        public async Task<IActionResult> GetUsers(long take, long skip)
-        {
-            return View();
-        }
+        //[Authorize(Roles = "GetUsers")]
+        //[HttpGet]
+        //public async Task<IActionResult> GetUsers(long take, long skip)
+        //{
+        //    return Ok();
+        //}
 
-        public async Task<IActionResult> CreateUser(CreateUserDTO newUser)
+        [HttpPost]
+        public async Task<ActionResult<CreateUserResponse>> CreateUser(CreateUserDTO newUser)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new CreateUserResponse(ModelState.GetErrorMessages().ToList()));

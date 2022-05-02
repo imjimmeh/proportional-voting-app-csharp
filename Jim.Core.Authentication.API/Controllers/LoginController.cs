@@ -1,22 +1,29 @@
-﻿using Jim.Core.Authentication.Models.Services;
+﻿using Jim.Core.Authentication.Models.DTOs;
+using Jim.Core.Authentication.Tokens.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jim.Core.Authentication.API.Controllers
 {
+    [ApiController]
     public class LoginController : Controller
     {
-        private readonly ILogger<LoginController> _logger;
-        private readonly IUserManagerService _usersService;
+        private readonly ITokenService _tokenService;
 
-        public LoginController(IUserManagerService usersService, ILogger<LoginController> logger)
+        public LoginController(ITokenService tokenService)
         {
-            _logger = logger;
-            _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
+            _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> LoginAsync(LoginRequest request)
         {
-            return View();
+            try
+            {
+                var result = await _usersService.()
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
     }
 }

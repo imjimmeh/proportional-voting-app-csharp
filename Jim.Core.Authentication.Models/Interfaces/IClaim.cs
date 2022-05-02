@@ -2,7 +2,7 @@
 {
     public interface IClaim
     {
-        string ClaimTypeValue { get; }
+        string Type { get; }
         string Value { get; set; }
     }
 }

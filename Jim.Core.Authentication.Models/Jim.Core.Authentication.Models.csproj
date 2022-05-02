@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jim.Core.Database\Jim.Core.Database.csproj" />
+    <ProjectReference Include="..\Jim.Core.Encryption.Models\Jim.Core.Encryption.Models.csproj" />
+    <ProjectReference Include="..\Jim.Core.Extensions\Jim.Core.Extensions.csproj" />
     <ProjectReference Include="..\Jim.Core.Shared.Models\Jim.Core.Shared.Models.csproj" />
   </ItemGroup>
 

@@ -23,6 +23,6 @@ namespace Jim.Core.Authentication.Models.Database
         public JimClaimType ClaimType { get; set; } = null!;
 
         [NotMapped]
-        public string ClaimTypeValue => ClaimType.Type.ToString();
+        public string Type => ClaimType.Type.ToString();
     }
 }
