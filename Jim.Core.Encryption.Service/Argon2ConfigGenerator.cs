@@ -6,6 +6,9 @@ namespace Jim.Core.Encryption.Service
 {
     public static class Argon2ConfigGenerator
     {
+        public static Argon2Config ToConfig(this Argon2EncryptionOptions options, string password, string salt)
+            => options.ToConfig(password, Convert.FromBase64String(salt));
+
         public static Argon2Config ToConfig(this Argon2EncryptionOptions options, string password, byte[] salt)
         {
             var config = new Argon2Config();

@@ -12,6 +12,12 @@
             Salt = !string.IsNullOrEmpty(salt) ? salt : throw new ArgumentNullException(nameof(salt));
         }
 
+        public HashedStringWithSalt(string hashedString, byte[] salt)
+        {
+            HashedString = !string.IsNullOrEmpty(hashedString) ? hashedString : throw new ArgumentNullException(nameof(hashedString));
+            Salt = salt != null ? Convert.ToBase64String(salt) : throw new ArgumentNullException(nameof(salt));
+        }
+
         public string HashedString { get; init; } = null!;
 
         public string Salt { get; init; } = null!;

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Jim.Core.Authentication.API.Controllers
 {
-    [ApiController]
     public class LoginController : BaseController<LoginController>
     {
         private readonly IUserTokenService _userTokenService;
@@ -16,6 +15,7 @@ namespace Jim.Core.Authentication.API.Controllers
             _userTokenService = userTokenService ?? throw new ArgumentNullException(nameof(userTokenService));
         }
 
+        [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginRequest request)
         {
             try

@@ -39,7 +39,7 @@ namespace Jim.Core.Encryption.Tests
         {
             HashedStringWithSalt result = HashString();
 
-            var verified = _encryptionService.VerifyHashedString(TESTING_PASSWORD, result);
+            var verified = _encryptionService!.VerifyHashedString(TESTING_PASSWORD, result);
 
             Assert.IsTrue(verified);
         }
@@ -49,7 +49,7 @@ namespace Jim.Core.Encryption.Tests
         {
             HashedStringWithSalt result = HashString();
 
-            var verified = _encryptionService.VerifyHashedString(RNGGenerator.GenerateString(15), result);
+            var verified = _encryptionService!.VerifyHashedString(RNGGenerator.GenerateString(15), result);
 
             Assert.IsFalse(verified);
         }
@@ -59,7 +59,7 @@ namespace Jim.Core.Encryption.Tests
         {
             HashedStringWithSalt result = HashString();
 
-            var verified = _encryptionService.VerifyHashedString(TESTING_PASSWORD.ToLower(), result);
+            var verified = _encryptionService!.VerifyHashedString(TESTING_PASSWORD.ToLower(), result);
 
             Assert.IsFalse(verified);
         }
@@ -69,28 +69,17 @@ namespace Jim.Core.Encryption.Tests
         {
             HashedStringWithSalt result = HashString();
 
-            var verified = _encryptionService.VerifyHashedString(" " + TESTING_PASSWORD, result);
+            var verified = _encryptionService!.VerifyHashedString(" " + TESTING_PASSWORD, result);
 
             Assert.IsFalse(verified);
         }
 
         [Test, Order(6)]
-        public void Argon2Service_Should_Not_Verify_Password_With_DifferentSalt()
-        {
-            HashedStringWithSalt result = HashString();
-
-            result = new HashedStringWithSalt(result.HashedString, "testing");
-            var verified = _encryptionService.VerifyHashedString(TESTING_PASSWORD, result);
-
-            Assert.IsFalse(verified);
-        }
-
-        [Test, Order(7)]
         public void Argon2Service_Should_Not_Verify_With_Different_Secret()
         {
             HashedStringWithSalt result = HashString();
 
-            var verified = _encryptionService.VerifyHashedString(RNGGenerator.GenerateString(15), result);
+            var verified = _encryptionService!.VerifyHashedString(RNGGenerator.GenerateString(15), result);
 
             Assert.IsFalse(verified);
         }
@@ -98,7 +87,7 @@ namespace Jim.Core.Encryption.Tests
 
         private HashedStringWithSalt HashString(string password = TESTING_PASSWORD)
         {
-            var result = _encryptionService.HashString(password);
+            var result = _encryptionService!.HashString(password);
 
             Assert.IsNotNull(result);
             Assert.IsNotEmpty(result.HashedString);

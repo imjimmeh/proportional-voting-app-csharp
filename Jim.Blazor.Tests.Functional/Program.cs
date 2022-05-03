@@ -3,9 +3,12 @@ using Jim.Blazor.Store.Models.Services;
 using Jim.Blazor.Store.Services;
 using Jim.Blazor.Store.Services.Stores;
 using Jim.Core.Authentication.Database.Service;
+using Jim.Core.Authentication.Http.Service;
 using Jim.Core.Authentication.Models.Database;
 using Jim.Core.Authentication.Models.Services;
 using Jim.Core.Authentication.Service;
+using Jim.Core.Encryption.Models;
+using Jim.Core.Encryption.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +19,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddHttpClient<IAuthenticationHttpService>(client => client.BaseAddress = new Uri(config["ConnectionStrings:AuthenticationApiUrl"]));
+
+builder.Services.AddScoped<IAuthenticationHttpService, AuthenticationHttpService>();
 builder.Services.AddScoped<IUserSignInManager<User>, UserSignInManager<User>>();
 builder.Services.AddScoped<IBlazorStoreReader, StoreReader>();
 builder.Services.AddScoped<IBlazorStoreWriter, StoreWriter>();
@@ -29,6 +35,8 @@ builder.Services.AddDbContext<IUserStore<User>, UsersDbContext>(options =>
 });
 
 builder.Services.AddScoped<IUserManagerService, UserManagerService<User>>();
+builder.Services.AddSingleton(new Argon2EncryptionOptions { Secret = builder.Configuration["EncryptionSecret"] });
+builder.Services.AddScoped<IEncryptionService, Argon2EncryptionService>();
 
 var app = builder.Build();
 

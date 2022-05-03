@@ -1,10 +1,33 @@
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using System;
+using System.Reflection;
 
 namespace Jim.Core.Tests.Base
 {
-    public class TestsBase
+    public class TestsBase<TConcrete>
+        where TConcrete : TestsBase<TConcrete>
     {
+        protected internal readonly IConfigurationRoot Config;
+
+        public TestsBase()
+        {
+            Config = BuildConfig();
+        }
+        
+        public IConfigurationRoot BuildConfig()
+        {
+            var environmentName = Environment.GetEnvironmentVariable("Hosting:Environment");
+
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", true)
+                .AddJsonFile($"appsettings.{environmentName}.json", true)
+                .AddEnvironmentVariables();
+
+            config.AddUserSecrets(Assembly.GetAssembly(typeof(TConcrete)));
+
+            return config.Build();
+        }
         public void ObjectsAreEqualsAndSecondIsNotNull(object expected, object toCompare)
         {
             try

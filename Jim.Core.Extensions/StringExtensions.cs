@@ -10,20 +10,17 @@ namespace Jim.Core.Extensions
         private static bool IsValid(this string newValue)
             => !string.IsNullOrEmpty(newValue);
 
-        public static SecureString? ToSecureString(this string plainString)
+        public static SecureString ToSecureString(this string plainString)
         {
-            if (plainString == null)
-                return null;
+            if (string.IsNullOrEmpty(plainString))
+                return new SecureString();
 
             var secureString = new SecureString();
 
             foreach (char c in plainString.ToCharArray())
-            {
                 secureString.AppendChar(c);
-            }
+
             return secureString;
         }
-
-        public static byte[] ToByteArray(this string value) => Convert.FromBase64String(value);
     }
 }

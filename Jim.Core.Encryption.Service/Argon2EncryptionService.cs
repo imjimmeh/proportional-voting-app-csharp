@@ -19,55 +19,22 @@ namespace Jim.Core.Encryption.Service
 
         public override bool VerifyHashedString(string toVerify, HashedStringWithSalt expected)
         {
-            try
-            {
-                var config = _options.ToConfig(toVerify, Encoding.ASCII.GetBytes(expected.Salt));
-
-                if (config.DecodeString(expected.HashedString, out SecureArray<byte>? hashB) && hashB != null)
-                {
-                    var argon2ToVerify = new Argon2(config);
-
-                    using (var hashToVerify = argon2ToVerify.Hash())
-                    {
-                        var equals = Argon2.FixedTimeEquals(hashB, hashToVerify);
-
-                        return equals;
-                    }
-                }
-
-                return false;
-            }
-            catch(ArgumentException ex)
-            {
-                return false;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error verifying hash", ex);
-            }
+            using var argon2Wrapper = new Argon2Wrapper();
+            return argon2Wrapper.VerifyHashedString(_options, toVerify, expected.HashedString, expected.Salt);
         }
 
         protected internal override HashedStringWithSalt ConcreteHashString(string toHash)
         {
-            try
-            {
-                var salt = CreateSalt();
-                var config = _options.ToConfig(toHash, salt);
+            var salt = CreateSalt();
+            return ConcreteHashString(toHash, salt);
+        }
 
-                using (var argon2 = new Argon2(config))
-                {
-                    using (SecureArray<byte> hashA = argon2.Hash())
-                    {
-                        var hashed = config.EncodeString(hashA.Buffer);
+        protected internal HashedStringWithSalt ConcreteHashString(string toHash, byte[] salt) => ConcreteHashString(toHash, Convert.ToBase64String(salt));
 
-                        return new HashedStringWithSalt(hashed, Encoding.ASCII.GetString(salt));
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new Exception($"Error hashing string - {ex.Message}");
-            }
+        protected internal override HashedStringWithSalt ConcreteHashString(string toHash, string salt)
+        {
+            using var argon2Wrapper = new Argon2Wrapper();
+            return argon2Wrapper.ConcreteHashString(_options, toHash, salt);
         }
 
         protected internal byte[] CreateSalt()

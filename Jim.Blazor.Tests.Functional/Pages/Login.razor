@@ -1,0 +1,42 @@
+﻿@page "/login"
+
+@using Jim.Core.Authentication.Models.DTOs
+@using Jim.Core.Authentication.Http.Service
+@inject IAuthenticationHttpService AuthService
+
+<h3>Login</h3>
+
+<div>
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input id="username" @bind-value="@username" placeholder="Username" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input id="password" @bind-value="@password" placeholder="Password" />
+    </div>
+
+    <button class="btn" @onclick="@LoginAsync">Login</button>
+    <div>
+        <p>@ReturnedToken</p>
+    </div>
+</div>
+@code {
+    public string username = "";
+    public string password = "";
+
+    public string ReturnedToken = "";
+    public async Task LoginAsync()
+    {
+        var request = new LoginRequest
+            {
+                Username = username,
+                Password = password
+            };
+
+        var result = await AuthService.LoginAsync(request);
+
+        ReturnedToken = result.IsSuccess ? result.GeneratedToken : string.Join("", result.ErrorMessages);
+    }
+}
+

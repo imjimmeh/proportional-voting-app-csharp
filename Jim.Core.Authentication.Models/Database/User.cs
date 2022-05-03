@@ -24,7 +24,7 @@ namespace Jim.Core.Authentication.Models.Database
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime LastModified { get; set; }
+        public DateTime LastModified { get; set; } = DateTime.UtcNow;
 
         public IList<UserClaim> UserClaims { get; set; } = new List<UserClaim>();
 

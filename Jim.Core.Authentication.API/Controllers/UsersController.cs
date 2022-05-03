@@ -1,18 +1,19 @@
 ﻿using Jim.Core.Authentication.Models.DTOs;
+using Jim.Core.Authentication.Models.Interfaces;
 using Jim.Core.Authentication.Models.Services;
 using Jim.Core.Extensions;
+using Jim.Core.Shared.APIs;
 using Jim.Core.Shared.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jim.Core.Authentication.API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class UsersController : Controller
+    public class UsersController : BaseController<UsersController>
     {
         private readonly IUserManagerService _usersService;
 
-        public UsersController(IUserManagerService usersService)
+        public UsersController(IUserManagerService usersService, ILogger<UsersController> logger) : base(logger)
         {
             _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
         }
@@ -42,6 +43,23 @@ namespace Jim.Core.Authentication.API.Controllers
             {
                 return BadRequest(new CreateUserResponse(new ResponseError[] { new ResponseError("Error creating new user"), new ResponseError(ex.Message) }));
             }
+        }
+
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = "JimCustom")]
+        public async Task<IActionResult> GetUsers()
+        {
+            return Ok(new GetUserDTO
+            {
+                Claims = new List<IClaim>
+                {
+                    new ClaimDTO
+                    {
+                        Type = "Test",
+                        Value = "Test"
+                    }
+                }
+            });
         }
     }
 }

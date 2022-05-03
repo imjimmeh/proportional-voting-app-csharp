@@ -54,7 +54,7 @@ namespace Jim.Core.Authentication.Service
                 if (existingUser == null)
                     throw new JimAuthenticationException(AuthenticationFailureReason.InvalidUsername);
 
-                var encryptedPassword = _encryptionService.VerifyHashedString(loginRequest.Username, new HashedStringWithSalt(existingUser.HashedPassword, existingUser.PasswordSalt));
+                var encryptedPassword = _encryptionService.VerifyHashedString(loginRequest.Password, new HashedStringWithSalt(existingUser.HashedPassword, existingUser.PasswordSalt));
 
                 if (!encryptedPassword)
                     throw new JimAuthenticationException(AuthenticationFailureReason.InvalidPassword);

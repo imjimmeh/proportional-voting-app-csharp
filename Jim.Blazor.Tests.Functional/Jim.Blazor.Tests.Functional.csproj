@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,8 +15,10 @@
     <ProjectReference Include="..\Jim.Blazor.Store.Models\Jim.Blazor.Store.Models.csproj" />
     <ProjectReference Include="..\Jim.Blazor.Store.Services\Jim.Blazor.Store.Services.csproj" />
     <ProjectReference Include="..\Jim.Core.Authentication.Database.Service\Jim.Core.Authentication.Database.Service.csproj" />
+    <ProjectReference Include="..\Jim.Core.Authentication.Http.Service\Jim.Core.Authentication.Http.Service.csproj" />
     <ProjectReference Include="..\Jim.Core.Authentication.Models\Jim.Core.Authentication.Models.csproj" />
     <ProjectReference Include="..\Jim.Core.Authentication.Service\Jim.Core.Authentication.Service.csproj" />
+    <ProjectReference Include="..\Jim.Core.Encryption.Service\Jim.Core.Encryption.Service.csproj" />
     <ProjectReference Include="..\Jim.Core.Store.Models\Jim.Core.Store.Models.csproj" />
   </ItemGroup>
 

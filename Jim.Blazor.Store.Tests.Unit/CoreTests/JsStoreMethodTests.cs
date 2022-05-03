@@ -5,7 +5,7 @@ using System;
 
 namespace Jim.Blazor.Store.Tests.Unit.CoreTests
 {
-    public class JsStoreMethodTests : TestsBase
+    public class JsStoreMethodTests : TestsBase<JsStoreMethodTests>
     {
         [Test]
         public void Should_Return_GetItem()

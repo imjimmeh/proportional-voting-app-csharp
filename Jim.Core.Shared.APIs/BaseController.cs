@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Jim.Core.Shared.APIs
 {
+    [ApiController]
+    [Route("[controller]")]
     public abstract class BaseController<TController> : Controller
         where TController : BaseController<TController>
     {
