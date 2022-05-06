@@ -7,6 +7,7 @@ using Jim.Core.Authentication.Tokens.Service.Models;
 using Jim.Core.Encryption.Models;
 using Jim.Core.Encryption.Service;
 using Jim.Core.Extensions;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -18,6 +19,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Cors", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.WithOrigins("http://localhost:3000");
+    });
+});
 
 builder.Services.AddDbContext<IUserStore<User>, UsersDbContext>(options =>
 {
@@ -61,4 +72,5 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllers();
 
+app.UseCors("Cors");
 app.Run();

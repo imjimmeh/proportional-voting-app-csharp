@@ -9,6 +9,8 @@ namespace Jim.Core.Authentication.Models.DTOs
 
         public DateTime? ExpiresAt { get; init; }
 
+        public GetUserDTO User { get; init; }
+
         public TokenLoginResponse()
         {
         }
@@ -25,7 +27,7 @@ namespace Jim.Core.Authentication.Models.DTOs
         {
         }
 
-        public TokenLoginResponse(ITokenResult? result)
+        public TokenLoginResponse(ITokenResult? result, GetUserDTO user)
         {
             var isSuccess = result != null && !string.IsNullOrEmpty(result.GeneratedToken);
 
@@ -34,6 +36,7 @@ namespace Jim.Core.Authentication.Models.DTOs
                 GeneratedToken = result.GeneratedToken;
                 ExpiresAt = result.ExpiresAt;
                 IsSuccess = true;
+                User = user;
             }
             else
             {

@@ -1,4 +1,5 @@
 ﻿using ProportionalVotingApp.Models.Base;
+using ProportionalVotingApp.Models.Database;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProportionalVotingApp.Models.DTOs
@@ -35,6 +36,17 @@ namespace ProportionalVotingApp.Models.DTOs
             Creator = creator;
             CreatedAt = DateTime.UtcNow;
             Completed = false;
+        }
+
+        public VoteDTO(VoteDbEntity dbEntity)
+        {
+            if (dbEntity == null)
+                throw new ArgumentNullException(nameof(dbEntity));
+
+            Creator = dbEntity.Creator;
+            CreatedAt = dbEntity.CreatedAt;
+            Options = dbEntity.Options.Select(option => new VoteOptionDTO(option.Id, option.Value)).ToList();
+            Name = dbEntity.Name;
         }
 
         public void AddOption(VoteOptionDTO option)

@@ -32,7 +32,7 @@ namespace Jim.Core.Authentication.Service
 
                 var token = await _tokenService.GenerateToken(user);
 
-                return new TokenLoginResponse(token);
+                return new TokenLoginResponse(token, user.Value);
             }
             catch (JimAuthenticationException ex)
             {

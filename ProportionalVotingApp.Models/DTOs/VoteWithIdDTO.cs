@@ -1,4 +1,5 @@
 ﻿using ProportionalVotingApp.Models.Base;
+using ProportionalVotingApp.Models.Database;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProportionalVotingApp.Models.DTOs
@@ -18,6 +19,11 @@ namespace ProportionalVotingApp.Models.DTOs
             CreatedAt = createdAt;
             Creator = creator;
 
+        }
+
+        public VoteWithIdDTO(VoteDbEntity dbEntity) : base(dbEntity)
+        {
+            Id = dbEntity.Id;
         }
 
 

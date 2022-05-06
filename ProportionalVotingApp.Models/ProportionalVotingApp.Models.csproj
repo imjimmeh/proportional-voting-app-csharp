@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Jim.Core.Shared.Models\Jim.Core.Shared.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProportionalVotingApp.Models.Database;
 using ProportionalVotingApp.Models.DTOs;
+using ProportionalVotingApp.Models.Requests;
 using ProportionalVotingApp.Models.Services;
 using System.Linq.Expressions;
 
@@ -75,5 +76,9 @@ namespace ProportionalVotingApp.DatabaseService
         {
             return _votes.Where(vote => vote.Id == id).Select(ConvertToDTOWithId).FirstOrDefaultAsync();
         }
+
+        public IQueryable<VoteDbEntity>? AcceptRequest<TRequest>(TRequest request)
+            where TRequest : IVoteRequest
+            => request != null ? _votes : null;
     }
 }

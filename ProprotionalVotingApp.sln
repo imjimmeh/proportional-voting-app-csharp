@@ -67,11 +67,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Shared.Tests", "Ji
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{EDBF4862-D851-4017-88CA-584CD476C102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Shared.APIs", "Jim.Core.Shared.APIs\Jim.Core.Shared.APIs.csproj", "{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Shared.APIs", "Jim.Core.Shared.APIs\Jim.Core.Shared.APIs.csproj", "{1B1B1E47-0E3E-4476-B3AE-BAD09C7CE362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.Tokens.Tests", "Jim.Core.Authentication.Tokens.Tests\Jim.Core.Authentication.Tokens.Tests.csproj", "{77A10919-179D-4251-B57C-6F90CEAE9422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Authentication.Tokens.Tests", "Jim.Core.Authentication.Tokens.Tests\Jim.Core.Authentication.Tokens.Tests.csproj", "{77A10919-179D-4251-B57C-6F90CEAE9422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jim.Core.Authentication.Http.Service", "Jim.Core.Authentication.Http.Service\Jim.Core.Authentication.Http.Service.csproj", "{FA8624B2-BD38-4FE5-AFF5-4B689CA5B99D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jim.Core.Authentication.Http.Service", "Jim.Core.Authentication.Http.Service\Jim.Core.Authentication.Http.Service.csproj", "{FA8624B2-BD38-4FE5-AFF5-4B689CA5B99D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProportionalVoting.Api", "ProportionalVoting.Api\ProportionalVoting.Api.csproj", "{33E1F09C-FFED-4F52-AD8C-AAFED2062432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -187,6 +189,10 @@ Global
 		{FA8624B2-BD38-4FE5-AFF5-4B689CA5B99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA8624B2-BD38-4FE5-AFF5-4B689CA5B99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA8624B2-BD38-4FE5-AFF5-4B689CA5B99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33E1F09C-FFED-4F52-AD8C-AAFED2062432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33E1F09C-FFED-4F52-AD8C-AAFED2062432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33E1F09C-FFED-4F52-AD8C-AAFED2062432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33E1F09C-FFED-4F52-AD8C-AAFED2062432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
